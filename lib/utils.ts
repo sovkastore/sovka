@@ -13,3 +13,13 @@ export function slugify(input: string) {
     .replace(/^-+|-+$/g, "")
     .slice(0, 40);
 }
+
+export function currencySymbol(code: string) {
+  if (code === "NGN") return "₦";
+  if (code === "GHS") return "₵";
+  return code + " ";
+}
+
+export function formatPrice(amount: number, code: string) {
+  return `${currencySymbol(code)}${(amount || 0).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+}

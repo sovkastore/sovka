@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Camera, Loader2, ImagePlus } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
 import { slugify } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,15 +10,34 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { SovcartLogo } from "@/components/brand/logo";
+import { createStore } from "@/app/onboarding/store/actions";
 
 const COUNTRIES = [
   { code: "GH", name: "Ghana", currency: "GHS", symbol: "₵", dial: "+233" },
   { code: "NG", name: "Nigeria", currency: "NGN", symbol: "₦", dial: "+234" },
 ];
 
-export function StoreForm({ userId }: { userId: string }) {
+async function compressImage(file: File, maxDim = 1600, quality = 0.85): Promise<Blob> {
+  try {
+    const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+    const scale = Math.min(1, maxDim / Math.max(bitmap.width, bitmap.height));
+    const w = Math.round(bitmap.width * scale);
+    const h = Math.round(bitmap.height * scale);
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return file;
+    ctx.drawImage(bitmap, 0, 0, w, h);
+    const blob: Blob | null = await new Promise((res) => canvas.toBlob(res, "image/jpeg", quality));
+    return blob ?? file;
+  } catch {
+    return file;
+  }
+}
+
+export function StoreForm({ userId: _userId }: { userId: string }) {
   const router = useRouter();
-  const supabase = createClient();
 
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
@@ -49,25 +67,30 @@ export function StoreForm({ userId }: { userId: string }) {
       setError("Please choose an image file.");
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-      setError("Image must be under 5MB.");
+    if (file.size > 15 * 1024 * 1024) {
+      setError("That image is too large — please pick one under 15MB.");
       return;
     }
     setUploading(kind);
-    const ext = file.name.split(".").pop() || "png";
-    const path = `${userId}/${kind}-${Date.now()}.${ext}`;
-    const { error: upErr } = await supabase.storage
-      .from("store-assets")
-      .upload(path, file, { upsert: true, contentType: file.type });
-    if (upErr) {
+    try {
+      const blob = await compressImage(file);
+      const fd = new FormData();
+      fd.append("file", new File([blob], `${kind}.jpg`, { type: blob.type || "image/jpeg" }));
+      fd.append("kind", kind);
+      const res = await fetch("/api/upload", { method: "POST", body: fd });
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        setError(j.error || "Upload failed — please try again.");
+        return;
+      }
+      const { url } = await res.json();
+      if (kind === "logo") setLogoUrl(url);
+      else setBannerUrl(url);
+    } catch {
+      setError("Upload failed — please try again.");
+    } finally {
       setUploading(null);
-      setError(upErr.message);
-      return;
     }
-    const { data } = supabase.storage.from("store-assets").getPublicUrl(path);
-    if (kind === "logo") setLogoUrl(data.publicUrl);
-    else setBannerUrl(data.publicUrl);
-    setUploading(null);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -82,30 +105,28 @@ export function StoreForm({ userId }: { userId: string }) {
       return;
     }
     setSaving(true);
-    const { error: insErr } = await supabase.from("stores").insert({
-      seller_id: userId,
+    const result = await createStore({
       name: name.trim(),
       slug,
-      logo_url: logoUrl,
-      banner_url: bannerUrl,
-      brand_color: brandColor,
+      logoUrl,
+      bannerUrl,
+      brandColor,
       bio: bio.trim() || null,
-      whatsapp_number: whatsapp.trim() || null,
-      instagram_handle: instagram.trim().replace(/^@/, "") || null,
-      country: countryCode,
+      whatsapp: whatsapp.trim() || null,
+      instagram: instagram.trim().replace(/^@/, "") || null,
+      countryCode,
       currency: country.currency,
     });
-    if (insErr) {
+    if (result.error) {
       setSaving(false);
-      if (insErr.code === "23505") {
+      if (result.code === "23505") {
         setError("That store link is already taken — try another one.");
         setSlugEdited(true);
       } else {
-        setError(insErr.message);
+        setError(result.error);
       }
       return;
     }
-    await supabase.from("sellers").update({ country: countryCode }).eq("id", userId);
     router.push("/dashboard");
     router.refresh();
   }
@@ -120,7 +141,6 @@ export function StoreForm({ userId }: { userId: string }) {
 
       <form onSubmit={handleSubmit} className="mt-6">
         <Card className="overflow-hidden p-0">
-          {/* Banner */}
           <label className="relative block h-32 w-full cursor-pointer">
             <div
               className="flex h-full w-full items-center justify-center"
@@ -150,7 +170,6 @@ export function StoreForm({ userId }: { userId: string }) {
           </label>
 
           <div className="px-5 pb-5">
-            {/* Logo */}
             <label className="relative -mt-9 mb-4 block h-[72px] w-[72px] cursor-pointer">
               <div className="h-full w-full overflow-hidden rounded-2xl border-4 border-white bg-canvas shadow-soft">
                 {logoUrl ? (
@@ -266,9 +285,7 @@ export function StoreForm({ userId }: { userId: string }) {
         <Button type="submit" disabled={saving || uploading !== null} className="mt-4 w-full">
           {saving ? "Creating your store…" : "Create store"}
         </Button>
-        <p className="mt-3 text-center text-xs text-muted">
-          You can add products right after this.
-        </p>
+        <p className="mt-3 text-center text-xs text-muted">You can add products right after this.</p>
       </form>
     </main>
   );

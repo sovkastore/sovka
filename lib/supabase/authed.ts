@@ -1,8 +1,6 @@
 import { createClient as createBaseClient } from "@supabase/supabase-js";
 import { createClient as createSsrClient } from "@/lib/supabase/server";
 
-// A Supabase client that explicitly carries a verified user's access token,
-// so Storage + Postgres requests run as that authenticated user (RLS-safe).
 export function createAuthedClient(accessToken: string) {
   return createBaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -14,7 +12,6 @@ export function createAuthedClient(accessToken: string) {
   );
 }
 
-// Verify the logged-in user (server-side) and return a token-scoped client.
 export async function getAuthed() {
   const ssr = createSsrClient();
   const {
@@ -24,5 +21,5 @@ export async function getAuthed() {
     data: { session },
   } = await ssr.auth.getSession();
   if (!user || !session) return null;
-  return { user, supabase: createAuthedClient(session.access_token) };
+  return { user, token: session.access_token, supabase: createAuthedClient(session.access_token) };
 }

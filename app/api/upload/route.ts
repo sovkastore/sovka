@@ -1,14 +1,12 @@
 import { NextResponse } from "next/server";
 import { getAuthed } from "@/lib/supabase/authed";
-import { createAdminClient } from "@/lib/supabase/admin";
 
 const ALLOWED_BUCKETS = ["store-assets", "product-images"];
 
 export async function POST(request: Request) {
-  // 1. Verify it's a real, logged-in seller.
   const authed = await getAuthed();
   if (!authed) return NextResponse.json({ error: "Your session expired — please log in again." }, { status: 401 });
-  const { user, supabase } = authed;
+  const { user, token } = authed;
 
   const form = await request.formData();
   const file = form.get("file");
@@ -18,24 +16,32 @@ export async function POST(request: Request) {
   if (!(file instanceof File)) return NextResponse.json({ error: "No file provided" }, { status: 400 });
   if (file.size > 6 * 1024 * 1024) return NextResponse.json({ error: "Image is too large" }, { status: 413 });
 
-  // 2. Write with the service-role client (reliable, bypasses storage RLS).
-  //    Falls back to the user-scoped client until the service key is configured.
-  const admin = createAdminClient();
-  const writer = admin ?? supabase;
-  const usingAdmin = admin !== null;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  // Use the service-role key if it's been configured; otherwise the verified user's own token.
+  const bearer = process.env.SUPABASE_SERVICE_ROLE_KEY || token;
 
   const ext = (file.type.split("/")[1] || "jpg").replace("jpeg", "jpg");
-  // Always scope the file under the seller's own folder, even with the master key.
   const path = `${user.id}/${kind}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-  const bytes = await file.arrayBuffer();
-  const { error } = await writer.storage
-    .from(bucket)
-    .upload(path, bytes, { contentType: file.type || "image/jpeg", upsert: true });
-  if (error) {
-    const hint = usingAdmin ? "" : " (server upload key not configured yet)";
-    return NextResponse.json({ error: error.message + hint }, { status: 400 });
+  const bytes = new Uint8Array(await file.arrayBuffer());
+
+  const res = await fetch(`${url}/storage/v1/object/${bucket}/${path}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${bearer}`,
+      apikey: anon,
+      "Content-Type": file.type || "image/jpeg",
+      "x-upsert": "true",
+      "cache-control": "3600",
+    },
+    body: bytes,
+  });
+
+  if (!res.ok) {
+    const msg = await res.text().catch(() => "");
+    return NextResponse.json({ error: `Upload failed (${res.status}): ${msg.slice(0, 180)}` }, { status: 400 });
   }
 
-  const { data } = writer.storage.from(bucket).getPublicUrl(path);
-  return NextResponse.json({ url: data.publicUrl });
+  const publicUrl = `${url}/storage/v1/object/public/${bucket}/${path}`;
+  return NextResponse.json({ url: publicUrl });
 }

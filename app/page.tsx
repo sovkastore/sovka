@@ -126,6 +126,72 @@ function StorePreview() {
   );
 }
 
+function PhonePreview() {
+  const cats = [
+    { i: Grid3x3, l: "All Products" },
+    { i: Tag, l: "Categories" },
+    { i: ShoppingBag, l: "New In" },
+    { i: Percent, l: "Deals" },
+  ];
+  const featured = [
+    { n: "Oversized T-Shirt", p: "\u20a618,500", img: "/products/tshirt-black.webp" },
+    { n: "Canvas Sneakers", p: "\u20a624,000", img: "/products/sneakers-white.webp" },
+  ];
+  return (
+    <div className="relative mx-auto w-full max-w-[320px] overflow-hidden rounded-[2rem] border border-white/10 bg-surface-2 p-2.5 shadow-card">
+      <div className="mx-auto mb-2 h-1 w-16 rounded-full bg-white/15" />
+      <div className="overflow-hidden rounded-[1.4rem] bg-surface">
+        <div className="flex items-center justify-between px-3 py-2.5">
+          <div className="flex items-center gap-2">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-white">LW</span>
+            <div className="leading-tight">
+              <p className="text-xs font-semibold text-ink">Luxe Wears</p>
+              <p className="text-[8px] text-muted">luxewears.sovcart.com</p>
+            </div>
+          </div>
+          <Menu className="h-4 w-4 text-muted" />
+        </div>
+        <div className="relative mx-3 h-40 overflow-hidden rounded-2xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
+          <img src="/products/hero.webp" alt="" className="absolute right-0 top-0 h-full w-3/5 object-cover object-top" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0E1B33] via-[#0E1B33]/80 to-transparent" />
+          <div className="absolute left-3 top-1/2 -translate-y-1/2">
+            <p className="text-[9px] font-medium text-muted">New Collection</p>
+            <p className="font-display text-base font-bold text-ink">Summer Drop</p>
+            <span className="mt-1.5 inline-flex rounded-full bg-black/50 px-2.5 py-1 text-[9px] font-semibold text-white">Shop Now</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-between px-3 py-3">
+          {cats.map(({ i: Icon, l }) => (
+            <div key={l} className="flex flex-1 flex-col items-center gap-1 text-center">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5"><Icon className="h-4 w-4 text-muted" /></span>
+              <span className="text-[8px] leading-tight text-muted">{l}</span>
+            </div>
+          ))}
+        </div>
+        <div className="px-3 pb-3">
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-ink">Featured Products</span>
+            <span className="text-[9px] text-brand">View all</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {featured.map((x) => (
+              <div key={x.n} className="overflow-hidden rounded-xl bg-white/5">
+                <div className="aspect-square w-full overflow-hidden">
+                  <img src={x.img} alt={x.n} className="h-full w-full object-cover" />
+                </div>
+                <div className="p-1.5">
+                  <p className="truncate text-[9px] text-muted">{x.n}</p>
+                  <p className="text-[11px] font-bold text-ink">{x.p}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
   return (
     <div className="relative min-h-screen overflow-x-hidden pb-24 lg:pb-0">
@@ -150,12 +216,12 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto grid max-w-content items-center gap-8 px-5 pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:px-8 lg:pt-6">
+      <section className="relative z-10 mx-auto grid max-w-content items-center gap-8 px-5 pt-4 md:grid-cols-[44fr_56fr] md:gap-8 md:px-8 md:pt-6 lg:grid-cols-[43fr_57fr] lg:gap-10">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-ink">
             <Sparkles className="h-4 w-4 text-brand" /> Built for African Sellers
           </span>
-          <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-[3.25rem]">
+          <h1 className="mt-5 font-display text-[2.6rem] font-bold leading-[1.04] tracking-tight text-ink sm:text-5xl md:text-[2.5rem] lg:text-[3.25rem]">
             Your Store.<br />Your Brand.<br /><span className="text-brand">Your Freedom.</span>
           </h1>
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted sm:text-base">
@@ -182,19 +248,24 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="relative">
-          <StorePreview />
+          <div className="hidden lg:block">
+            <StorePreview />
+          </div>
+          <div className="lg:hidden">
+            <PhonePreview />
+          </div>
         </div>
       </section>
 
       <section className="relative z-10 mx-auto mt-10 max-w-content px-5 lg:px-8">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5 lg:grid-cols-4">
+        <div className="grid grid-cols-4 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5">
           {PILLS.map(({ icon: Icon, title, sub }) => (
-            <div key={title} className="flex flex-col items-center gap-2 bg-surface px-4 py-5 text-center">
+            <div key={title} className="flex flex-col items-center gap-2 bg-surface px-2 py-5 text-center sm:px-4">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand/10 text-brand">
                 <Icon className="h-6 w-6" />
               </span>
-              <p className="mt-1 font-semibold text-ink">{title}</p>
-              <p className="text-sm text-muted">{sub}</p>
+              <p className="mt-1 text-[13px] font-semibold leading-tight text-ink sm:text-base">{title}</p>
+              <p className="text-[11px] leading-tight text-muted sm:text-sm">{sub}</p>
             </div>
           ))}
         </div>
@@ -205,18 +276,18 @@ export default function LandingPage() {
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Everything you need to sell</h2>
           <p className="mt-2 text-muted">Powerful features designed for modern sellers</p>
         </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {FEATURES.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="flex items-start gap-4 rounded-3xl border border-white/10 bg-surface p-4 transition hover:border-brand/40 lg:flex-col lg:gap-2.5">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+            <div key={title} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-surface p-3.5 transition hover:border-brand/40 sm:rounded-3xl sm:p-4 lg:flex-col lg:gap-2.5">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand/10 text-brand sm:h-12 sm:w-12">
                 <Icon className="h-6 w-6" />
               </span>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <p className="font-semibold text-ink">{title}</p>
+                  <p className="text-sm font-semibold leading-tight text-ink sm:text-base">{title}</p>
                   <ChevronRight className="h-4 w-4 text-muted lg:hidden" />
                 </div>
-                <p className="mt-1 text-sm leading-relaxed text-muted">{desc}</p>
+                <p className="mt-1 text-[11px] leading-relaxed text-muted sm:text-sm">{desc}</p>
               </div>
             </div>
           ))}

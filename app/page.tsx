@@ -153,10 +153,8 @@ export default function LandingPage() {
           </div>
           <div className="mt-8 flex items-center gap-3">
             <div className="flex -space-x-3">
-              <img src="/people/seller-daniel.webp" alt="" className="h-9 w-9 rounded-full border-2 border-canvas object-cover" />
-              <img src="/people/avatar-1.webp" alt="" className="h-9 w-9 rounded-full border-2 border-canvas object-cover" />
-              {["from-[#06B6D4] to-[#0891B2]", "from-[#F59E0B] to-[#D97706]"].map((g, i) => (
-                <span key={i} className={`h-9 w-9 rounded-full border-2 border-canvas bg-gradient-to-br ${g}`} />
+              {["/people/seller-daniel.webp", "/people/avatar-1.webp", "/people/avatar-2.webp", "/people/avatar-3.webp"].map((src) => (
+                <img key={src} src={src} alt="" className="h-9 w-9 rounded-full border-2 border-canvas object-cover" />
               ))}
             </div>
             <p className="text-sm text-muted">Join 2,000+ sellers growing with Sovcart</p>

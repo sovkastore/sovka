@@ -84,12 +84,12 @@ function StorePreview() {
       {/* body: hero + categories (left) | featured (right) */}
       <div className="flex flex-col gap-2.5 px-3 pb-3 sm:flex-row">
         <div className="flex flex-1 flex-col gap-2.5">
-          <div className="relative h-32 overflow-hidden rounded-xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
+          <div className="relative h-44 overflow-hidden rounded-xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
             <img src="/products/hero.webp" alt="" className="absolute right-0 top-0 h-full w-1/2 object-cover object-top" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0E1B33] via-[#0E1B33]/85 to-transparent" />
             <div className="absolute left-3 top-1/2 -translate-y-1/2">
               <p className="text-[9px] font-medium text-muted">New Collection</p>
-              <p className="font-display text-base font-bold text-ink">Summer Drop</p>
+              <p className="font-display text-lg font-bold text-ink">Summer Drop</p>
               <span className="mt-1.5 inline-flex rounded-full bg-black/50 px-2.5 py-1 text-[9px] font-semibold text-white">Shop Now</span>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function LandingPage() {
       <div className="pointer-events-none absolute -top-40 right-0 h-[480px] w-[480px] rounded-full bg-brand/20 blur-[120px]" />
       <div className="pointer-events-none absolute top-[420px] -left-40 h-[360px] w-[360px] rounded-full bg-brand/10 blur-[120px]" />
 
-      <header className="relative z-10 mx-auto flex max-w-content items-center justify-between px-5 py-5 lg:px-8">
+      <header className="relative z-10 mx-auto flex max-w-content items-center justify-between px-5 py-4 lg:px-8">
         <SovcartLogo size={36} />
         <nav className="hidden items-center gap-8 text-sm font-medium text-muted lg:flex">
           {NAV.map((n) => (
@@ -150,18 +150,18 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto grid max-w-content items-center gap-12 px-5 pt-6 lg:grid-cols-2 lg:gap-10 lg:px-8 lg:pt-10">
+      <section className="relative z-10 mx-auto grid max-w-content items-center gap-8 px-5 pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:px-8 lg:pt-6">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-ink">
             <Sparkles className="h-4 w-4 text-brand" /> Built for African Sellers
           </span>
-          <h1 className="mt-6 font-display text-[2.75rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl">
+          <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-[3.25rem]">
             Your Store.<br />Your Brand.<br /><span className="text-brand">Your Freedom.</span>
           </h1>
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted sm:text-base">
+          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted sm:text-base">
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
-          <div className="mt-8 flex items-center gap-5">
+          <div className="mt-6 flex items-center gap-5">
             <Link href="/signup" className="inline-flex h-14 items-center gap-2 rounded-full bg-brand-grad px-7 text-base font-semibold text-white shadow-glow transition active:scale-[0.98]">
               Create Your Store <ArrowRight className="h-5 w-5" />
             </Link>
@@ -172,7 +172,7 @@ export default function LandingPage() {
               Watch Demo
             </button>
           </div>
-          <div className="mt-8 flex items-center gap-3">
+          <div className="mt-6 flex items-center gap-3">
             <div className="flex -space-x-3">
               {["/people/seller-daniel.webp", "/people/avatar-1.webp", "/people/avatar-2.webp", "/people/avatar-3.webp"].map((src) => (
                 <img key={src} src={src} alt="" className="h-9 w-9 rounded-full border-2 border-canvas object-cover" />
@@ -186,10 +186,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-16 max-w-content px-5 lg:px-8">
+      <section className="relative z-10 mx-auto mt-10 max-w-content px-5 lg:px-8">
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5 lg:grid-cols-4">
           {PILLS.map(({ icon: Icon, title, sub }) => (
-            <div key={title} className="flex flex-col items-center gap-2 bg-surface px-4 py-7 text-center">
+            <div key={title} className="flex flex-col items-center gap-2 bg-surface px-4 py-5 text-center">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand/10 text-brand">
                 <Icon className="h-6 w-6" />
               </span>
@@ -200,14 +200,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-20 max-w-content px-5 pb-20 lg:px-8">
+      <section className="relative z-10 mx-auto mt-12 max-w-content px-5 pb-12 lg:px-8">
         <div className="text-center">
-          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">Everything you need to sell</h2>
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Everything you need to sell</h2>
           <p className="mt-2 text-muted">Powerful features designed for modern sellers</p>
         </div>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="flex items-start gap-4 rounded-3xl border border-white/10 bg-surface p-5 transition hover:border-brand/40 lg:flex-col lg:gap-3">
+            <div key={title} className="flex items-start gap-4 rounded-3xl border border-white/10 bg-surface p-4 transition hover:border-brand/40 lg:flex-col lg:gap-2.5">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand/10 text-brand">
                 <Icon className="h-6 w-6" />
               </span>

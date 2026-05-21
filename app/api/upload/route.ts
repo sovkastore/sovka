@@ -1,12 +1,18 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { createAuthedClient } from "@/lib/supabase/authed";
 
 export async function POST(request: Request) {
-  const supabase = createClient();
+  const ssr = createClient();
   const {
     data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
+  } = await ssr.auth.getUser();
+  const {
+    data: { session },
+  } = await ssr.auth.getSession();
+  if (!user || !session) {
+    return NextResponse.json({ error: "Your session expired — please log in again." }, { status: 401 });
+  }
 
   const form = await request.formData();
   const file = form.get("file");
@@ -14,6 +20,7 @@ export async function POST(request: Request) {
   if (!(file instanceof File)) return NextResponse.json({ error: "No file provided" }, { status: 400 });
   if (file.size > 6 * 1024 * 1024) return NextResponse.json({ error: "Image is too large" }, { status: 413 });
 
+  const supabase = createAuthedClient(session.access_token);
   const ext = (file.type.split("/")[1] || "jpg").replace("jpeg", "jpg");
   const path = `${user.id}/${kind}-${Date.now()}.${ext}`;
   const bytes = await file.arrayBuffer();

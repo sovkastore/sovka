@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createAuthedClient } from "@/lib/supabase/authed";
 
 export type CreateStoreInput = {
   name: string;
@@ -16,12 +17,16 @@ export type CreateStoreInput = {
 };
 
 export async function createStore(input: CreateStoreInput): Promise<{ error?: string; code?: string }> {
-  const supabase = createClient();
+  const ssr = createClient();
   const {
     data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return { error: "Your session expired — please log in again." };
+  } = await ssr.auth.getUser();
+  const {
+    data: { session },
+  } = await ssr.auth.getSession();
+  if (!user || !session) return { error: "Your session expired — please log in again." };
 
+  const supabase = createAuthedClient(session.access_token);
   const { error } = await supabase.from("stores").insert({
     seller_id: user.id,
     name: input.name,

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sovka — Your store, ready to share",
+  title: "Sovcart — Your store, ready to share",
   description:
     "Beautiful online stores for sellers in Ghana & Nigeria. Upload your products, share one link, get paid.",
   manifest: "/manifest.webmanifest",

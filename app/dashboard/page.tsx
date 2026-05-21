@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Card } from "@/components/ui/card";
-import { SovkaLogo } from "@/components/brand/logo";
+import { SovcartLogo } from "@/components/brand/logo";
 import { SignOutButton } from "@/components/sign-out-button";
 
 export default async function DashboardPage() {
@@ -14,7 +14,7 @@ export default async function DashboardPage() {
   return (
     <main className="mx-auto max-w-md px-5 py-8">
       <header className="mb-6 flex items-center justify-between">
-        <SovkaLogo size={32} />
+        <SovcartLogo size={32} />
         <SignOutButton />
       </header>
       <Card className="p-7">

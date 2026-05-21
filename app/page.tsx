@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Store, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { SovkaMark } from "@/components/brand/logo";
+import { SovcartMark } from "@/components/brand/logo";
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
           transition={{ duration: 0.5 }}
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 py-1.5 pl-1.5 pr-4 text-xs font-semibold uppercase tracking-widest backdrop-blur"
         >
-          <SovkaMark size={22} /> Sovka
+          <SovcartMark size={22} /> Sovcart
         </motion.span>
 
         <motion.h1

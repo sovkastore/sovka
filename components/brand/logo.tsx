@@ -2,9 +2,9 @@ import { cn } from "@/lib/utils";
 
 type MarkProps = { size?: number; className?: string; variant?: "tile" | "plain" };
 
-export function SovkaMark({ size = 40, className, variant = "tile" }: MarkProps) {
+export function SovcartMark({ size = 40, className, variant = "tile" }: MarkProps) {
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" className={className} role="img" aria-label="Sovka">
+    <svg width={size} height={size} viewBox="0 0 100 100" className={className} role="img" aria-label="Sovcart">
       <defs>
         <linearGradient id="sovka-g" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#6E3BFF" />
@@ -20,7 +20,7 @@ export function SovkaMark({ size = 40, className, variant = "tile" }: MarkProps)
   );
 }
 
-export function SovkaLogo({
+export function SovcartLogo({
   size = 34,
   tone = "dark",
   variant = "tile",
@@ -33,9 +33,9 @@ export function SovkaLogo({
 }) {
   return (
     <span className={cn("inline-flex items-center gap-2", className)}>
-      <SovkaMark size={size} variant={variant} />
+      <SovcartMark size={size} variant={variant} />
       <span className={cn("text-xl font-extrabold tracking-tight", tone === "light" ? "text-white" : "text-ink")}>
-        Sovka
+        Sovcart
       </span>
     </span>
   );

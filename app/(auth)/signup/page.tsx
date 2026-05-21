@@ -59,7 +59,7 @@ export default function SignupPage() {
         <label className="mt-1 flex items-start gap-2 text-xs text-muted">
           <input type="checkbox" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} className="mt-0.5 h-4 w-4 accent-brand" />
           <span>
-            I agree to Sovka&apos;s <Link href="/terms" className="font-medium text-brand">Terms</Link> and{" "}
+            I agree to Sovcart&apos;s <Link href="/terms" className="font-medium text-brand">Terms</Link> and{" "}
             <Link href="/privacy" className="font-medium text-brand">Privacy Policy</Link>.
           </span>
         </label>

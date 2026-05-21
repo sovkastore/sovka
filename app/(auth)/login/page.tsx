@@ -46,7 +46,7 @@ export default function LoginPage() {
         </Button>
       </form>
       <p className="mt-5 text-center text-sm text-muted">
-        New to Sovka? <Link href="/signup" className="font-semibold text-brand">Create an account</Link>
+        New to Sovcart? <Link href="/signup" className="font-semibold text-brand">Create an account</Link>
       </p>
     </Card>
   );

@@ -1,41 +1,62 @@
 import { cn } from "@/lib/utils";
 
-type MarkProps = { size?: number; className?: string; variant?: "tile" | "plain" };
-
-export function SovcartMark({ size = 40, className, variant = "tile" }: MarkProps) {
+export function SovcartMark({ size = 36, className }: { size?: number; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" className={className} role="img" aria-label="Sovcart">
-      <defs>
-        <linearGradient id="sovka-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#6E3BFF" />
-          <stop offset="1" stopColor="#4A1FBF" />
-        </linearGradient>
-      </defs>
-      {variant === "tile" && <rect x="2" y="2" width="96" height="96" rx="26" fill="url(#sovka-g)" />}
-      <path d="M37 43 C37 33 40 29 43.5 29 C47 29 50 33 50 43" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="round" />
-      <path d="M50 43 C50 33 53 29 56.5 29 C60 29 63 33 63 43" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="round" />
-      <path d="M30 42 H70 L68.3 73.5 C68.2 75.2 66.8 76.5 65 76.5 H35 C33.2 76.5 31.8 75.2 31.7 73.5 L30 42 Z" fill="#ffffff" />
-      <path d="M34 50 H66" stroke="#6E3BFF" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
+    <span
+      style={{ width: size, height: size }}
+      className={cn(
+        "relative inline-flex shrink-0 items-center justify-center rounded-[28%] bg-brand-grad shadow-glow",
+        className
+      )}
+    >
+      <svg viewBox="0 0 32 32" width={size * 0.66} height={size * 0.66} fill="none">
+        {/* shopping-bag handle */}
+        <path
+          d="M11 12V10.5a5 5 0 0 1 10 0V12"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        {/* bag body */}
+        <path
+          d="M8.5 12h15l-1 11.5a2 2 0 0 1-2 1.8H11.5a2 2 0 0 1-2-1.8L8.5 12Z"
+          fill="white"
+          fillOpacity="0.16"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinejoin="round"
+        />
+        <text
+          x="16"
+          y="22"
+          textAnchor="middle"
+          fontFamily="Poppins, Inter, sans-serif"
+          fontSize="11"
+          fontWeight="800"
+          fill="white"
+        >
+          S
+        </text>
+      </svg>
+    </span>
   );
 }
 
 export function SovcartLogo({
-  size = 34,
-  tone = "dark",
-  variant = "tile",
+  size = 32,
+  tagline = false,
   className,
 }: {
   size?: number;
-  tone?: "dark" | "light";
-  variant?: "tile" | "plain";
+  tagline?: boolean;
   className?: string;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
-      <SovcartMark size={size} variant={variant} />
-      <span className={cn("text-xl font-extrabold tracking-tight", tone === "light" ? "text-white" : "text-ink")}>
-        Sovcart
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
+      <SovcartMark size={size} />
+      <span className="leading-none">
+        <span className="font-display text-[1.35rem] font-bold tracking-tight text-ink">Sovcart</span>
+        {tagline && <span className="mt-0.5 block text-[11px] font-medium text-muted">Build. Brand. Sell.</span>}
       </span>
     </span>
   );

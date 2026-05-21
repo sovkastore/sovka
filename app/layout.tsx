@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sovcart — Your store, ready to share",
+  title: "Sovcart — Your Store. Your Brand. Your Freedom.",
   description:
-    "Beautiful online stores for sellers in Ghana & Nigeria. Upload your products, share one link, get paid.",
+    "Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart. Built for African sellers.",
   manifest: "/manifest.webmanifest",
 };
 
-export const viewport: Viewport = { themeColor: "#5A31F4" };
+export const viewport: Viewport = { themeColor: "#0B1220" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,11 +17,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body className="bg-canvas text-ink antialiased">{children}</body>
     </html>
   );
 }

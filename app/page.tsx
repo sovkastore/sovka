@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Store, ArrowRight, Sparkles } from "lucide-react";
+import { Store, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { SovkaMark } from "@/components/brand/logo";
 
 export default function Home() {
   return (
@@ -15,9 +17,9 @@ export default function Home() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-widest backdrop-blur"
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 py-1.5 pl-1.5 pr-4 text-xs font-semibold uppercase tracking-widest backdrop-blur"
         >
-          <Sparkles className="h-3.5 w-3.5" /> Sovka
+          <SovkaMark size={22} /> Sovka
         </motion.span>
 
         <motion.h1
@@ -47,11 +49,16 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="mt-8 flex w-full flex-col items-center gap-3"
         >
-          <button className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 font-semibold text-ink shadow-soft transition active:scale-[0.98]">
+          <Link
+            href="/signup"
+            className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 font-semibold text-ink shadow-soft transition active:scale-[0.98]"
+          >
             <Store className="h-5 w-5 text-brand" /> Create your store
             <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-          </button>
-          <p className="text-xs text-white/60">Coming soon · building in progress 🚧</p>
+          </Link>
+          <Link href="/login" className="text-sm font-medium text-white/70">
+            I already have an account
+          </Link>
         </motion.div>
       </div>
     </main>

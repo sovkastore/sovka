@@ -59,13 +59,14 @@ function StorePreview() {
         </div>
         <ShoppingBag className="h-4 w-4 text-muted" />
       </div>
-      <div className="mx-4 mb-3 flex items-center justify-between overflow-hidden rounded-2xl bg-gradient-to-r from-[#0E1B33] to-[#16345C] p-4">
-        <div>
+      <div className="relative mx-4 mb-3 h-40 overflow-hidden rounded-2xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
+        <img src="/products/hero.webp" alt="" className="absolute right-0 top-0 h-full w-3/5 object-cover object-top" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0E1B33] via-[#0E1B33]/80 to-transparent" />
+        <div className="absolute left-4 top-1/2 -translate-y-1/2">
           <p className="text-[10px] font-medium text-muted">New Collection</p>
-          <p className="font-display text-lg font-bold text-ink">Summer Drop</p>
+          <p className="font-display text-xl font-bold text-ink">Summer Drop</p>
           <span className="mt-2 inline-flex rounded-full bg-black/40 px-3 py-1 text-[10px] font-semibold text-white">Shop Now</span>
         </div>
-        <div className="h-20 w-20 rounded-xl bg-gradient-to-br from-[#3A4A66] to-[#1B2A45]" />
       </div>
       <div className="grid grid-cols-4 gap-1 px-4">
         {[
@@ -86,11 +87,13 @@ function StorePreview() {
       </div>
       <div className="grid grid-cols-2 gap-2 px-4 pb-4">
         {[
-          { n: "Oversized T-Shirt", p: "\u20a618,500", g: "from-[#2A3550] to-[#171F33]" },
-          { n: "Canvas Sneakers", p: "\u20a624,000", g: "from-[#37445E] to-[#1A2335]" },
+          { n: "Oversized T-Shirt", p: "\u20a618,500", img: "/products/tshirt-black.webp" },
+          { n: "Canvas Sneakers", p: "\u20a624,000", img: "/products/sneakers-white.webp" },
         ].map((x) => (
           <div key={x.n} className="overflow-hidden rounded-xl bg-white/5">
-            <div className={`aspect-square w-full bg-gradient-to-br ${x.g}`} />
+            <div className="aspect-square w-full overflow-hidden">
+              <img src={x.img} alt={x.n} className="h-full w-full object-cover" />
+            </div>
             <div className="p-2">
               <p className="truncate text-[10px] text-ink">{x.n}</p>
               <p className="text-[11px] font-bold text-ink">{x.p}</p>
@@ -150,7 +153,9 @@ export default function LandingPage() {
           </div>
           <div className="mt-8 flex items-center gap-3">
             <div className="flex -space-x-3">
-              {["from-[#3B82F6] to-[#1D4ED8]", "from-[#8B5CF6] to-[#6D28D9]", "from-[#06B6D4] to-[#0891B2]", "from-[#F59E0B] to-[#D97706]"].map((g, i) => (
+              <img src="/people/seller-daniel.webp" alt="" className="h-9 w-9 rounded-full border-2 border-canvas object-cover" />
+              <img src="/people/avatar-1.webp" alt="" className="h-9 w-9 rounded-full border-2 border-canvas object-cover" />
+              {["from-[#06B6D4] to-[#0891B2]", "from-[#F59E0B] to-[#D97706]"].map((g, i) => (
                 <span key={i} className={`h-9 w-9 rounded-full border-2 border-canvas bg-gradient-to-br ${g}`} />
               ))}
             </div>

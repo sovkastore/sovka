@@ -5,7 +5,7 @@ import { getAuthed } from "@/lib/supabase/authed";
 import { Card } from "@/components/ui/card";
 import { SovcartLogo } from "@/components/brand/logo";
 import { SignOutButton } from "@/components/sign-out-button";
-import { formatPrice } from "@/lib/utils";
+import { ProductList } from "@/components/products/product-list";
 
 export default async function DashboardPage() {
   const authed = await getAuthed();
@@ -17,10 +17,20 @@ export default async function DashboardPage() {
 
   const { data: products } = await supabase
     .from("products")
-    .select("id, title, price, stock, status, product_images(url, position)")
+    .select("id, title, price, stock, status, featured, created_at, product_images(url, position)")
     .eq("store_id", store.id)
     .order("created_at", { ascending: false });
-  const list = products ?? [];
+
+  const list = (products ?? []).map((p: any) => ({
+    id: p.id,
+    title: p.title,
+    price: Number(p.price),
+    stock: p.stock ?? 0,
+    status: p.status,
+    featured: !!p.featured,
+    created_at: p.created_at,
+    product_images: p.product_images ?? [],
+  }));
 
   return (
     <main className="mx-auto max-w-md px-5 py-8">
@@ -80,31 +90,7 @@ export default async function DashboardPage() {
           <p className="max-w-[15rem] text-sm text-muted">Add your first product and share your link to start selling.</p>
         </Card>
       ) : (
-        <div className="grid grid-cols-2 gap-3">
-          {list.map((p: any) => {
-            const img = [...(p.product_images ?? [])].sort((a: any, b: any) => a.position - b.position)[0]?.url as
-              | string
-              | undefined;
-            return (
-              <div key={p.id} className="overflow-hidden rounded-3xl bg-white shadow-card">
-                <div className="aspect-square w-full bg-canvas">
-                  {img ? (
-                    <img src={img} alt="" className="h-full w-full object-cover" />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center text-muted">
-                      <Package className="h-7 w-7" />
-                    </div>
-                  )}
-                </div>
-                <div className="p-3">
-                  <p className="truncate text-sm font-semibold text-ink">{p.title}</p>
-                  <p className="text-sm font-bold text-brand">{formatPrice(Number(p.price), store.currency)}</p>
-                  <p className="mt-0.5 text-xs text-muted">{p.stock} in stock</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <ProductList products={list} currency={store.currency} />
       )}
     </main>
   );

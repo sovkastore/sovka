@@ -12,16 +12,27 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { createProduct } from "@/app/dashboard/products/new/actions";
+import { updateProduct } from "@/app/dashboard/products/manage-actions";
 
-export function ProductForm({ currency }: { currency: string }) {
+type EditProduct = {
+  id: string;
+  title: string;
+  description: string | null;
+  price: number;
+  stock: number;
+  images: string[];
+};
+
+export function ProductForm({ currency, product }: { currency: string; product?: EditProduct }) {
   const router = useRouter();
   const symbol = currencySymbol(currency);
+  const isEdit = !!product;
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [stock, setStock] = useState("1");
-  const [images, setImages] = useState<string[]>([]);
+  const [title, setTitle] = useState(product?.title ?? "");
+  const [description, setDescription] = useState(product?.description ?? "");
+  const [price, setPrice] = useState(product ? String(product.price) : "");
+  const [stock, setStock] = useState(product ? String(product.stock) : "1");
+  const [images, setImages] = useState<string[]>(product?.images ?? []);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -66,14 +77,16 @@ export function ProductForm({ currency }: { currency: string }) {
       return;
     }
     setSaving(true);
-    const result = await createProduct({
+    const payload = {
       title: title.trim(),
       description: description.trim() || null,
       price: priceNum,
       stock: parseInt(stock, 10) || 0,
-      status: "active",
       imageUrls: images,
-    });
+    };
+    const result = isEdit
+      ? await updateProduct({ id: product!.id, ...payload })
+      : await createProduct({ ...payload, status: "active" });
     if (result.error) {
       setSaving(false);
       setError(result.error);
@@ -89,7 +102,7 @@ export function ProductForm({ currency }: { currency: string }) {
         <Link href="/dashboard" className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white shadow-soft">
           <ArrowLeft className="h-5 w-5 text-ink" />
         </Link>
-        <h1 className="text-2xl font-bold text-ink">Add product</h1>
+        <h1 className="text-2xl font-bold text-ink">{isEdit ? "Edit product" : "Add product"}</h1>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -119,13 +132,7 @@ export function ProductForm({ currency }: { currency: string }) {
                       <span className="text-[11px] font-medium">Add</span>
                     </>
                   )}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    className="hidden"
-                    onChange={(e) => addImages(e.target.files)}
-                  />
+                  <input type="file" accept="image/*" multiple className="hidden" onChange={(e) => addImages(e.target.files)} />
                 </label>
               )}
             </div>
@@ -175,7 +182,7 @@ export function ProductForm({ currency }: { currency: string }) {
         {error && <p className="mt-3 text-sm text-accent">{error}</p>}
 
         <Button type="submit" disabled={saving || uploading} className="mt-4 w-full">
-          {saving ? "Saving…" : "Add product"}
+          {saving ? "Saving…" : isEdit ? "Save changes" : "Add product"}
         </Button>
       </form>
     </main>

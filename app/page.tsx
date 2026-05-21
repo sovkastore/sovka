@@ -18,6 +18,11 @@ import {
   Menu,
   ChevronRight,
   Grid3x3,
+  Shirt,
+  Footprints,
+  Percent,
+  Search,
+  ShoppingCart,
 } from "lucide-react";
 import { SovcartLogo } from "@/components/brand/logo";
 
@@ -38,68 +43,84 @@ const FEATURES = [
 ];
 
 function StorePreview() {
+  const cats = [
+    { i: Grid3x3, l: "All Products" },
+    { i: Shirt, l: "T-Shirts" },
+    { i: Footprints, l: "Shoes" },
+    { i: Tag, l: "Accessories" },
+    { i: ShoppingBag, l: "New In" },
+    { i: Percent, l: "Deals" },
+  ];
+  const featured = [
+    { n: "Oversized T-Shirt", p: "\u20a618,500", img: "/products/tshirt-black.webp" },
+    { n: "Canvas Sneakers", p: "\u20a624,000", img: "/products/sneakers-white.webp" },
+  ];
   return (
-    <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-surface-2 shadow-card">
-      <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-        <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-        <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
-        <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-        <div className="mx-auto flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1 text-xs text-muted">
-          <span className="h-2.5 w-2.5 rounded-full border border-success" />
+    <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-surface-2 shadow-card">
+      {/* browser bar */}
+      <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+        <div className="mx-auto flex items-center gap-1.5 rounded-md bg-white/5 px-3 py-1 text-[11px] text-muted">
+          <span className="h-2 w-2 rounded-full border border-success" />
           luxewears.sovcart.com
         </div>
       </div>
-      <div className="flex items-center justify-between px-4 py-3">
+      {/* store header */}
+      <div className="flex items-center justify-between px-3 py-2.5">
         <div className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand text-[11px] font-bold text-white">LW</span>
-          <span className="font-display text-sm font-semibold tracking-[0.2em] text-ink">LUXE WEARS</span>
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-white">LW</span>
+          <span className="font-display text-xs font-semibold tracking-[0.18em] text-ink">LUXE WEARS</span>
         </div>
-        <div className="hidden items-center gap-4 text-xs text-muted sm:flex">
+        <div className="hidden items-center gap-3 text-[10px] text-muted md:flex">
           <span>Shop</span><span>Categories</span><span>New In</span><span>Deals</span>
         </div>
-        <ShoppingBag className="h-4 w-4 text-muted" />
-      </div>
-      <div className="relative mx-4 mb-3 h-40 overflow-hidden rounded-2xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
-        <img src="/products/hero.webp" alt="" className="absolute right-0 top-0 h-full w-3/5 object-cover object-top" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0E1B33] via-[#0E1B33]/80 to-transparent" />
-        <div className="absolute left-4 top-1/2 -translate-y-1/2">
-          <p className="text-[10px] font-medium text-muted">New Collection</p>
-          <p className="font-display text-xl font-bold text-ink">Summer Drop</p>
-          <span className="mt-2 inline-flex rounded-full bg-black/40 px-3 py-1 text-[10px] font-semibold text-white">Shop Now</span>
+        <div className="flex items-center gap-2 text-muted">
+          <Search className="h-3.5 w-3.5" />
+          <ShoppingCart className="h-3.5 w-3.5" />
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-1 px-4">
-        {[
-          { i: Grid3x3, l: "All Products" },
-          { i: Tag, l: "Categories" },
-          { i: ShoppingBag, l: "New In" },
-          { i: Sparkles, l: "Deals" },
-        ].map(({ i: Icon, l }) => (
-          <div key={l} className="flex flex-col items-center gap-1 py-1 text-center">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5"><Icon className="h-4 w-4 text-muted" /></span>
-            <span className="text-[9px] text-muted">{l}</span>
-          </div>
-        ))}
-      </div>
-      <div className="flex items-center justify-between px-4 pb-1 pt-3">
-        <span className="text-xs font-semibold text-ink">Featured Products</span>
-        <span className="text-[10px] text-brand">View all</span>
-      </div>
-      <div className="grid grid-cols-2 gap-2 px-4 pb-4">
-        {[
-          { n: "Oversized T-Shirt", p: "\u20a618,500", img: "/products/tshirt-black.webp" },
-          { n: "Canvas Sneakers", p: "\u20a624,000", img: "/products/sneakers-white.webp" },
-        ].map((x) => (
-          <div key={x.n} className="overflow-hidden rounded-xl bg-white/5">
-            <div className="aspect-square w-full overflow-hidden">
-              <img src={x.img} alt={x.n} className="h-full w-full object-cover" />
-            </div>
-            <div className="p-2">
-              <p className="truncate text-[10px] text-ink">{x.n}</p>
-              <p className="text-[11px] font-bold text-ink">{x.p}</p>
+      {/* body: hero + categories (left) | featured (right) */}
+      <div className="flex flex-col gap-2.5 px-3 pb-3 sm:flex-row">
+        <div className="flex flex-1 flex-col gap-2.5">
+          <div className="relative h-32 overflow-hidden rounded-xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
+            <img src="/products/hero.webp" alt="" className="absolute right-0 top-0 h-full w-1/2 object-cover object-top" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0E1B33] via-[#0E1B33]/85 to-transparent" />
+            <div className="absolute left-3 top-1/2 -translate-y-1/2">
+              <p className="text-[9px] font-medium text-muted">New Collection</p>
+              <p className="font-display text-base font-bold text-ink">Summer Drop</p>
+              <span className="mt-1.5 inline-flex rounded-full bg-black/50 px-2.5 py-1 text-[9px] font-semibold text-white">Shop Now</span>
             </div>
           </div>
-        ))}
+          <div className="flex items-center justify-between">
+            {cats.map(({ i: Icon, l }) => (
+              <div key={l} className="flex flex-1 flex-col items-center gap-1 text-center">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5"><Icon className="h-3.5 w-3.5 text-muted" /></span>
+                <span className="text-[8px] leading-tight text-muted">{l}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 sm:w-[42%]">
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-ink">Featured Products</span>
+            <span className="text-[9px] text-brand">View all</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {featured.map((x) => (
+              <div key={x.n} className="overflow-hidden rounded-lg bg-white/5">
+                <div className="aspect-square w-full overflow-hidden">
+                  <img src={x.img} alt={x.n} className="h-full w-full object-cover" />
+                </div>
+                <div className="p-1.5">
+                  <p className="truncate text-[9px] text-ink">{x.n}</p>
+                  <p className="text-[10px] font-bold text-ink">{x.p}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

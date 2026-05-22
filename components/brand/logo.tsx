@@ -18,20 +18,20 @@ export function SovcartMark({ size = 36, className }: { size?: number; className
           d="M10.5 11 L21.5 11 L23 24 Q23.4 27.3 20.1 27.3 L11.9 27.3 Q8.6 27.3 9 24 Z"
           fill="url(#sovBagGrad)"
         />
-        {/* two short handle arcs at the rim */}
+        {/* single centered handle loop above the rim */}
         <path
-          d="M12 11.2C12 8.4 15 8.4 15 11.2 M17 11.2C17 8.4 20 8.4 20 11.2"
+          d="M12.4 11.2V9.6a3.6 3.6 0 0 1 7.2 0v1.6"
           stroke="white"
           strokeWidth="1.8"
           strokeLinecap="round"
         />
-        {/* bold white S */}
+        {/* white S, smaller and centered */}
         <text
           x="16"
-          y="24.2"
+          y="23"
           textAnchor="middle"
           fontFamily="Poppins, Inter, sans-serif"
-          fontSize="13.5"
+          fontSize="11"
           fontWeight="800"
           fill="white"
         >

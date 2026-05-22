@@ -216,15 +216,15 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto grid max-w-content items-center gap-6 px-5 pt-3 md:grid-cols-[48fr_52fr] md:gap-7 md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
-        <div>
+      <section className="relative z-10 mx-auto grid min-h-[455px] max-w-content items-start gap-6 px-5 pt-3 md:min-h-0 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
+        <div className="relative z-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-ink">
             <Sparkles className="h-4 w-4 text-brand" /> Built for African Sellers
           </span>
-          <h1 className="mt-4 font-display text-[2.6rem] font-bold leading-[1.04] tracking-tight text-ink sm:text-5xl md:text-[2.4rem] lg:text-[3.25rem]">
+          <h1 className="mt-4 max-w-[56%] font-display text-[2.15rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-[2.6rem] md:max-w-none md:text-[2.4rem] lg:text-[3.25rem]">
             Your Store.<br />Your Brand.<br /><span className="text-brand">Your Freedom.</span>
           </h1>
-          <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted sm:text-base">
+          <p className="mt-3 max-w-[56%] text-[13px] leading-relaxed text-muted sm:text-sm md:max-w-md md:text-base">
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
           <div className="mt-5 flex flex-nowrap items-center gap-3 lg:gap-4">
@@ -247,12 +247,12 @@ export default function LandingPage() {
             <p className="min-w-0 flex-1 text-sm leading-snug text-muted">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
-        <div className="relative">
+        <div className="pointer-events-none absolute -right-10 top-2 z-0 w-[52%] max-w-[225px] md:pointer-events-auto md:static md:right-auto md:top-auto md:z-auto md:w-auto md:max-w-none">
           <div className="hidden lg:block">
             <StorePreview />
           </div>
-          <div className="lg:hidden [perspective:1500px]">
-            <div className="[transform:rotateY(-14deg)_rotateX(2deg)] drop-shadow-2xl">
+          <div className="[perspective:1500px] lg:hidden">
+            <div className="[transform:rotate(7deg)] drop-shadow-2xl md:[transform:rotateY(-14deg)_rotateX(2deg)]">
               <PhonePreview />
             </div>
           </div>

@@ -13,22 +13,25 @@ export function SovcartMark({ size = 36, className }: { size?: number; className
             <stop offset="1" stopColor="#0A84FF" />
           </linearGradient>
         </defs>
-        {/* white handle arch sitting above the bag */}
+        {/* shopping-bag body: trapezoid flaring wider at the bottom, rounded base */}
         <path
-          d="M11 12.5V9a5 5 0 0 1 10 0v3.5"
+          d="M10.5 11 L21.5 11 L23 24 Q23.4 27.3 20.1 27.3 L11.9 27.3 Q8.6 27.3 9 24 Z"
+          fill="url(#sovBagGrad)"
+        />
+        {/* two short handle arcs at the rim */}
+        <path
+          d="M12 11.2C12 8.4 15 8.4 15 11.2 M17 11.2C17 8.4 20 8.4 20 11.2"
           stroke="white"
-          strokeWidth="2.4"
+          strokeWidth="1.8"
           strokeLinecap="round"
         />
-        {/* blue bag body, no container behind it */}
-        <rect x="6.5" y="12" width="19" height="16" rx="5" fill="url(#sovBagGrad)" />
         {/* bold white S */}
         <text
           x="16"
-          y="24.6"
+          y="24.2"
           textAnchor="middle"
           fontFamily="Poppins, Inter, sans-serif"
-          fontSize="15"
+          fontSize="13.5"
           fontWeight="800"
           fill="white"
         >

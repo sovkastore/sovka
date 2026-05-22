@@ -1,3 +1,4 @@
+import { ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function SovcartMark({ size = 36, className }: { size?: number; className?: string }) {
@@ -9,35 +10,11 @@ export function SovcartMark({ size = 36, className }: { size?: number; className
         className
       )}
     >
-      <svg viewBox="0 0 32 32" width={size * 0.66} height={size * 0.66} fill="none">
-        {/* shopping-bag handle */}
-        <path
-          d="M11 12V10.5a5 5 0 0 1 10 0V12"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        {/* bag body */}
-        <path
-          d="M8.5 12h15l-1 11.5a2 2 0 0 1-2 1.8H11.5a2 2 0 0 1-2-1.8L8.5 12Z"
-          fill="white"
-          fillOpacity="0.16"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinejoin="round"
-        />
-        <text
-          x="16"
-          y="22"
-          textAnchor="middle"
-          fontFamily="Poppins, Inter, sans-serif"
-          fontSize="11"
-          fontWeight="800"
-          fill="white"
-        >
-          S
-        </text>
-      </svg>
+      <ShoppingCart
+        size={Math.round(size * 0.56)}
+        strokeWidth={2.2}
+        className="text-white"
+      />
     </span>
   );
 }

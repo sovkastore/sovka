@@ -24,7 +24,7 @@ import {
   Search,
   ShoppingCart,
 } from "lucide-react";
-import { SovcartLogo } from "@/components/brand/logo";
+import { SovcartLogo, SovcartMark } from "@/components/brand/logo";
 
 const NAV = ["Features", "Pricing", "Demo", "Resources"];
 
@@ -64,14 +64,16 @@ function StorePreview() {
         <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
         <div className="mx-auto flex items-center gap-1.5 rounded-md bg-white/5 px-3 py-1 text-[11px] text-muted">
           <span className="h-2 w-2 rounded-full border border-success" />
-          luxewears.sovcart.com
+          yourstore.sovcart.com
         </div>
       </div>
       {/* store header */}
       <div className="flex items-center justify-between px-3 py-2.5">
         <div className="flex items-center gap-2">
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-white">LW</span>
-          <span className="font-display text-xs font-semibold tracking-[0.18em] text-ink">LUXE WEARS</span>
+          <span className="flex items-center gap-2">
+          <SovcartMark size={22} className="shadow-none" />
+          <span className="font-display text-xs font-semibold tracking-[0.12em] text-ink">SOVCART</span>
+        </span>
         </div>
         <div className="hidden items-center gap-3 text-[10px] text-muted md:flex">
           <span>Shop</span><span>Categories</span><span>New In</span><span>Deals</span>
@@ -143,10 +145,10 @@ function PhonePreview() {
       <div className="overflow-hidden rounded-[1.4rem] bg-surface">
         <div className="flex items-center justify-between px-3 py-2.5">
           <div className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-white">LW</span>
+            <SovcartMark size={26} className="shadow-none" />
             <div className="leading-tight">
-              <p className="text-xs font-semibold text-ink">Luxe Wears</p>
-              <p className="text-[8px] text-muted">luxewears.sovcart.com</p>
+              <p className="text-xs font-semibold text-ink">Sovcart</p>
+              <p className="text-[8px] text-muted">yourstore.sovcart.com</p>
             </div>
           </div>
           <Menu className="h-4 w-4 text-muted" />

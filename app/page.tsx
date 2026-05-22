@@ -216,23 +216,23 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative isolate z-10 mx-auto grid min-h-[345px] max-w-content items-start gap-5 overflow-hidden px-5 pt-3 md:min-h-0 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:overflow-visible md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
+      <section className="relative isolate z-10 mx-auto grid max-w-content items-start gap-9 px-5 pt-4 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:px-8 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
         <div className="relative z-10">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-ink sm:gap-2 sm:px-4 sm:py-1.5 sm:text-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand sm:h-4 sm:w-4" /> Built for African Sellers
           </span>
-          <h1 className="mt-3 max-w-[52%] font-display text-[1.55rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.6rem] md:max-w-none md:text-[2.4rem] lg:text-[3.25rem]">
+          <h1 className="mt-3 font-display text-[clamp(1.95rem,6.5vw,2.6rem)] font-bold leading-[1.1] tracking-tight text-ink md:text-[2.4rem] lg:text-[3.25rem]">
             Your Store.<br />Your Brand.<br /><span className="text-brand">Your Freedom.</span>
           </h1>
-          <p className="mt-2 max-w-[52%] text-[11px] leading-relaxed text-muted sm:text-sm md:max-w-md md:text-base">
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-muted md:text-base">
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
           <div className="mt-4 flex flex-nowrap items-center gap-3 lg:gap-4">
-            <Link href="/signup" className="inline-flex h-10 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-grad px-3.5 text-[13px] font-semibold text-white shadow-glow transition active:scale-[0.98] lg:h-14 lg:gap-2 lg:px-7 lg:text-base">
+            <Link href="/signup" className="inline-flex h-12 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-brand-grad px-5 text-sm font-semibold text-white shadow-glow transition active:scale-[0.98] lg:h-14 lg:px-7 lg:text-base">
               Create Your Store <ArrowRight className="h-4 w-4 shrink-0 lg:h-5 lg:w-5" />
             </Link>
-            <button className="flex shrink-0 items-center gap-2 whitespace-nowrap text-[13px] font-medium text-ink lg:gap-3 lg:text-base">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 lg:h-12 lg:w-12">
+            <button className="flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-medium text-ink lg:gap-3 lg:text-base">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 lg:h-12 lg:w-12">
                 <Play className="h-4 w-4 fill-ink" />
               </span>
               Watch Demo
@@ -247,12 +247,12 @@ export default function LandingPage() {
             <p className="min-w-0 flex-1 text-[12px] leading-snug text-muted sm:text-sm">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
-        <div className="pointer-events-none absolute right-0 top-2 z-0 w-[300px] origin-top-right md:pointer-events-auto md:static md:right-auto md:top-auto md:z-auto md:w-auto md:origin-center">
+        <div className="mx-auto w-full max-w-[300px] sm:max-w-[330px] md:mx-0 md:max-w-none">
           <div className="hidden lg:block">
             <StorePreview />
           </div>
-          <div className="origin-top-right [perspective:1500px] md:origin-center lg:hidden">
-            <div className="origin-top-right transform-gpu [backface-visibility:hidden] [transform:rotate(8deg)_scale(0.5)] md:origin-center md:[transform:rotateY(-14deg)_rotateX(2deg)]">
+          <div className="[perspective:1500px] lg:hidden">
+            <div className="origin-center transform-gpu [backface-visibility:hidden] md:[transform:rotateY(-14deg)_rotateX(2deg)]">
               <PhonePreview />
             </div>
           </div>

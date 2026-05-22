@@ -175,14 +175,12 @@ function PhonePreview() {
           </div>
           <div className="grid grid-cols-2 gap-2">
             {featured.map((x) => (
-              <div key={x.n} className="overflow-hidden rounded-xl bg-white/5">
-                <div className="aspect-square w-full overflow-hidden">
+              <div key={x.n}>
+                <div className="aspect-square w-full overflow-hidden rounded-xl bg-white/5">
                   <img src={x.img} alt={x.n} className="h-full w-full object-cover" />
                 </div>
-                <div className="p-1.5">
-                  <p className="truncate text-[9px] text-muted">{x.n}</p>
-                  <p className="text-[11px] font-bold text-ink">{x.p}</p>
-                </div>
+                <p className="mt-1.5 truncate text-[9px] text-muted">{x.n}</p>
+                <p className="text-[11px] font-bold text-ink">{x.p}</p>
               </div>
             ))}
           </div>
@@ -227,11 +225,11 @@ export default function LandingPage() {
           <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted sm:text-base">
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
-          <div className="mt-5 flex items-center gap-5">
-            <Link href="/signup" className="inline-flex h-14 items-center gap-2 rounded-full bg-brand-grad px-7 text-base font-semibold text-white shadow-glow transition active:scale-[0.98]">
-              Create Your Store <ArrowRight className="h-5 w-5" />
+          <div className="mt-5 flex flex-wrap items-center gap-4">
+            <Link href="/signup" className="inline-flex h-14 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-brand-grad px-7 text-base font-semibold text-white shadow-glow transition active:scale-[0.98]">
+              Create Your Store <ArrowRight className="h-5 w-5 shrink-0" />
             </Link>
-            <button className="flex items-center gap-3 text-sm font-medium text-ink">
+            <button className="flex shrink-0 items-center gap-3 whitespace-nowrap text-sm font-medium text-ink">
               <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15">
                 <Play className="h-4 w-4 fill-ink" />
               </span>
@@ -239,12 +237,12 @@ export default function LandingPage() {
             </button>
           </div>
           <div className="mt-5 flex items-center gap-3">
-            <div className="flex -space-x-3">
+            <div className="flex shrink-0 -space-x-3">
               {["/people/seller-daniel.webp", "/people/avatar-1.webp", "/people/avatar-2.webp", "/people/avatar-3.webp"].map((src) => (
                 <img key={src} src={src} alt="" className="h-9 w-9 rounded-full border-2 border-canvas object-cover" />
               ))}
             </div>
-            <p className="text-sm text-muted">Join 2,000+ sellers growing with Sovcart</p>
+            <p className="min-w-0 text-sm leading-snug text-muted">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
         <div className="relative">

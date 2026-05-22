@@ -217,7 +217,7 @@ export default function LandingPage() {
       </header>
 
       <section className="relative isolate z-10 mx-auto grid grid-cols-1 max-w-content items-start gap-7 px-5 pt-4 min-[540px]:grid-cols-[1fr_40%] min-[540px]:items-center min-[540px]:gap-4 md:grid-cols-[48fr_52fr] md:gap-7 md:px-8 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
-        <div className="relative z-10">
+        <div className="relative z-10 text-center min-[540px]:text-left">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-ink sm:gap-2 sm:px-4 sm:py-1.5 sm:text-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand sm:h-4 sm:w-4" /> Built for African Sellers
           </span>
@@ -227,7 +227,7 @@ export default function LandingPage() {
           <p className="mt-2 text-xs leading-relaxed text-muted sm:text-sm md:mt-3 md:max-w-md md:text-base">
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
-          <div className="mt-4 flex flex-wrap items-center gap-2 md:flex-nowrap md:gap-3 lg:gap-4">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 min-[540px]:justify-start md:flex-nowrap md:gap-3 lg:gap-4">
             <Link href="/signup" className="inline-flex h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-brand-grad px-4 text-[13px] font-semibold text-white shadow-glow transition active:scale-[0.98] md:h-12 md:px-5 md:text-sm lg:h-14 lg:px-7 lg:text-base">
               Create Your Store <ArrowRight className="h-4 w-4 shrink-0 lg:h-5 lg:w-5" />
             </Link>
@@ -238,13 +238,13 @@ export default function LandingPage() {
               Watch Demo
             </button>
           </div>
-          <div className="mt-4 flex items-center gap-3">
+          <div className="mt-4 flex items-center justify-center gap-3 min-[540px]:justify-start">
             <div className="flex shrink-0 -space-x-3">
               {["/people/seller-daniel.webp", "/people/avatar-1.webp", "/people/avatar-2.webp", "/people/avatar-3.webp"].map((src) => (
                 <img key={src} src={src} alt="" className="h-8 w-8 rounded-full border-2 border-canvas object-cover" />
               ))}
             </div>
-            <p className="min-w-0 flex-1 text-[12px] leading-snug text-muted sm:text-sm">Join 2,000+ sellers growing with Sovcart</p>
+            <p className="min-w-0 text-[12px] leading-snug text-muted sm:text-sm min-[540px]:flex-1">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
         <div className="mx-auto w-full max-w-[340px] min-[540px]:mx-0 min-[540px]:max-w-none">
@@ -260,7 +260,7 @@ export default function LandingPage() {
       </section>
 
       <section className="relative z-10 mx-auto mt-6 max-w-content px-5 lg:mt-10 lg:px-8">
-        <div className="grid grid-cols-4 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5 min-[540px]:grid-cols-4">
           {PILLS.map(({ icon: Icon, title, sub }) => (
             <div key={title} className="flex flex-col items-center gap-1.5 bg-surface px-2 py-4 text-center sm:px-4 lg:py-5">
               <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand/10 text-brand lg:h-12 lg:w-12">

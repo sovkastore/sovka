@@ -110,7 +110,7 @@ function StorePreview() {
           <div className="grid grid-cols-2 gap-2">
             {featured.map((x) => (
               <div key={x.n} className="overflow-hidden rounded-lg bg-white/5">
-                <div className="aspect-square w-full overflow-hidden">
+                <div className="aspect-[5/4] w-full overflow-hidden">
                   <img src={x.img} alt={x.n} className="h-full w-full object-cover" />
                 </div>
                 <div className="p-1.5">
@@ -151,7 +151,7 @@ function PhonePreview() {
           </div>
           <Menu className="h-4 w-4 text-muted" />
         </div>
-        <div className="relative mx-3 h-40 overflow-hidden rounded-2xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
+        <div className="relative mx-3 h-32 overflow-hidden rounded-2xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
           <img src="/products/hero.webp" alt="" className="absolute right-0 top-0 h-full w-3/5 object-cover object-top" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0E1B33] via-[#0E1B33]/80 to-transparent" />
           <div className="absolute left-3 top-1/2 -translate-y-1/2">
@@ -160,7 +160,7 @@ function PhonePreview() {
             <span className="mt-1.5 inline-flex rounded-full bg-black/50 px-2.5 py-1 text-[9px] font-semibold text-white">Shop Now</span>
           </div>
         </div>
-        <div className="flex items-center justify-between px-3 py-3">
+        <div className="flex items-center justify-between px-3 py-2.5">
           {cats.map(({ i: Icon, l }) => (
             <div key={l} className="flex flex-1 flex-col items-center gap-1 text-center">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5"><Icon className="h-4 w-4 text-muted" /></span>
@@ -216,18 +216,18 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto grid max-w-content items-center gap-8 px-5 pt-4 md:grid-cols-[44fr_56fr] md:gap-8 md:px-8 md:pt-6 lg:grid-cols-[43fr_57fr] lg:gap-10">
+      <section className="relative z-10 mx-auto grid max-w-content items-center gap-6 px-5 pt-3 md:grid-cols-[44fr_56fr] md:gap-7 md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-ink">
             <Sparkles className="h-4 w-4 text-brand" /> Built for African Sellers
           </span>
-          <h1 className="mt-5 font-display text-[2.6rem] font-bold leading-[1.04] tracking-tight text-ink sm:text-5xl md:text-[2.5rem] lg:text-[3.25rem]">
+          <h1 className="mt-4 font-display text-[2.6rem] font-bold leading-[1.04] tracking-tight text-ink sm:text-5xl md:text-[2.4rem] lg:text-[3.25rem]">
             Your Store.<br />Your Brand.<br /><span className="text-brand">Your Freedom.</span>
           </h1>
-          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted sm:text-base">
+          <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted sm:text-base">
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
-          <div className="mt-6 flex items-center gap-5">
+          <div className="mt-5 flex items-center gap-5">
             <Link href="/signup" className="inline-flex h-14 items-center gap-2 rounded-full bg-brand-grad px-7 text-base font-semibold text-white shadow-glow transition active:scale-[0.98]">
               Create Your Store <ArrowRight className="h-5 w-5" />
             </Link>
@@ -238,7 +238,7 @@ export default function LandingPage() {
               Watch Demo
             </button>
           </div>
-          <div className="mt-6 flex items-center gap-3">
+          <div className="mt-5 flex items-center gap-3">
             <div className="flex -space-x-3">
               {["/people/seller-daniel.webp", "/people/avatar-1.webp", "/people/avatar-2.webp", "/people/avatar-3.webp"].map((src) => (
                 <img key={src} src={src} alt="" className="h-9 w-9 rounded-full border-2 border-canvas object-cover" />
@@ -251,17 +251,19 @@ export default function LandingPage() {
           <div className="hidden lg:block">
             <StorePreview />
           </div>
-          <div className="lg:hidden">
-            <PhonePreview />
+          <div className="lg:hidden [perspective:1500px]">
+            <div className="[transform:rotateY(-14deg)_rotateX(2deg)] drop-shadow-2xl">
+              <PhonePreview />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-10 max-w-content px-5 lg:px-8">
+      <section className="relative z-10 mx-auto mt-6 max-w-content px-5 lg:mt-10 lg:px-8">
         <div className="grid grid-cols-4 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5">
           {PILLS.map(({ icon: Icon, title, sub }) => (
-            <div key={title} className="flex flex-col items-center gap-2 bg-surface px-2 py-5 text-center sm:px-4">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+            <div key={title} className="flex flex-col items-center gap-1.5 bg-surface px-2 py-4 text-center sm:px-4 lg:py-5">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand/10 text-brand lg:h-12 lg:w-12">
                 <Icon className="h-6 w-6" />
               </span>
               <p className="mt-1 text-[13px] font-semibold leading-tight text-ink sm:text-base">{title}</p>
@@ -271,7 +273,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto mt-12 max-w-content px-5 pb-12 lg:px-8">
+      <section className="relative z-10 mx-auto mt-6 max-w-content px-5 pb-8 lg:mt-12 lg:px-8 lg:pb-12">
         <div className="text-center">
           <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">Everything you need to sell</h2>
           <p className="mt-2 text-muted">Powerful features designed for modern sellers</p>

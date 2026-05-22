@@ -216,7 +216,7 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto grid min-h-[455px] max-w-content items-start gap-6 px-5 pt-3 md:min-h-0 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
+      <section className="relative isolate z-10 mx-auto grid min-h-[455px] max-w-content items-start gap-6 overflow-hidden px-5 pt-3 md:min-h-0 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:overflow-visible md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
         <div className="relative z-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-ink">
             <Sparkles className="h-4 w-4 text-brand" /> Built for African Sellers
@@ -247,12 +247,12 @@ export default function LandingPage() {
             <p className="min-w-0 flex-1 text-sm leading-snug text-muted">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
-        <div className="pointer-events-none absolute -right-10 top-2 z-0 w-[52%] max-w-[225px] md:pointer-events-auto md:static md:right-auto md:top-auto md:z-auto md:w-auto md:max-w-none">
+        <div className="pointer-events-none absolute -right-4 top-3 z-0 w-[50%] max-w-[210px] md:pointer-events-auto md:static md:right-auto md:top-auto md:z-auto md:w-auto md:max-w-none">
           <div className="hidden lg:block">
             <StorePreview />
           </div>
-          <div className="[perspective:1500px] lg:hidden">
-            <div className="[transform:rotate(7deg)] drop-shadow-2xl md:[transform:rotateY(-14deg)_rotateX(2deg)]">
+          <div className="transform-gpu [backface-visibility:hidden] [perspective:1500px] lg:hidden">
+            <div className="transform-gpu [backface-visibility:hidden] [transform:rotate(7deg)] md:[transform:rotateY(-14deg)_rotateX(2deg)]">
               <PhonePreview />
             </div>
           </div>

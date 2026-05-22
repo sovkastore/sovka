@@ -4,30 +4,33 @@ export function SovcartMark({ size = 36, className }: { size?: number; className
   return (
     <span
       style={{ width: size, height: size }}
-      className={cn(
-        "relative inline-flex shrink-0 items-center justify-center rounded-[28%] bg-brand-grad shadow-glow",
-        className
-      )}
+      className={cn("relative inline-flex shrink-0 items-center justify-center", className)}
     >
-      <svg viewBox="0 0 32 32" width={size * 0.72} height={size * 0.72} fill="none">
-        {/* handle arch above the bag */}
+      <svg viewBox="0 0 32 32" width={size} height={size} fill="none">
+        <defs>
+          <linearGradient id="sovBagGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#38BDF8" />
+            <stop offset="1" stopColor="#0A84FF" />
+          </linearGradient>
+        </defs>
+        {/* white handle arch sitting above the bag */}
         <path
-          d="M11.4 13.4v-2.8a4.6 4.6 0 0 1 9.2 0v2.8"
+          d="M11 12.5V9a5 5 0 0 1 10 0v3.5"
           stroke="white"
-          strokeWidth="2.2"
+          strokeWidth="2.4"
           strokeLinecap="round"
         />
-        {/* rounded bucket bag body (solid white) */}
-        <rect x="8.8" y="12.4" width="14.4" height="13.4" rx="3.8" fill="white" />
-        {/* bold blue S */}
+        {/* blue bag body, no container behind it */}
+        <rect x="6.5" y="12" width="19" height="16" rx="5" fill="url(#sovBagGrad)" />
+        {/* bold white S */}
         <text
           x="16"
-          y="23.2"
+          y="24.6"
           textAnchor="middle"
           fontFamily="Poppins, Inter, sans-serif"
-          fontSize="12.5"
+          fontSize="15"
           fontWeight="800"
-          fill="#0A84FF"
+          fill="white"
         >
           S
         </text>

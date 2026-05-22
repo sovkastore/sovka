@@ -140,7 +140,7 @@ function PhonePreview() {
     { n: "Canvas Sneakers", p: "\u20a624,000", img: "/products/sneakers-white.webp" },
   ];
   return (
-    <div className="relative mx-auto w-full max-w-[320px] overflow-hidden rounded-[2rem] border border-white/10 bg-surface-2 p-2.5 shadow-card">
+    <div className="relative mx-auto w-full max-w-[320px] overflow-hidden rounded-[2rem] border border-white/10 bg-surface-2 p-2.5 shadow-card [container-type:inline-size]">
       <div className="mx-auto mb-2 h-1 w-16 rounded-full bg-white/15" />
       <div className="overflow-hidden rounded-[1.4rem] bg-surface">
         <div className="flex items-center justify-between px-3 py-2.5">
@@ -153,7 +153,7 @@ function PhonePreview() {
           </div>
           <Menu className="h-4 w-4 text-muted" />
         </div>
-        <div className="relative mx-3 h-32 overflow-hidden rounded-2xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
+        <div className="relative mx-3 h-[40cqw] max-h-32 overflow-hidden rounded-2xl bg-gradient-to-r from-[#0E1B33] to-[#16345C]">
           <img src="/products/hero.webp" alt="" className="absolute right-0 top-0 h-full w-3/5 object-cover object-top" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0E1B33] via-[#0E1B33]/80 to-transparent" />
           <div className="absolute left-3 top-1/2 -translate-y-1/2">
@@ -216,23 +216,23 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative isolate z-10 mx-auto grid max-w-content items-start gap-9 px-5 pt-4 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:px-8 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
+      <section className="relative isolate z-10 mx-auto grid grid-cols-[1fr_40%] max-w-content items-center gap-4 px-5 pt-4 md:grid-cols-[48fr_52fr] md:gap-7 md:px-8 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
         <div className="relative z-10">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-ink sm:gap-2 sm:px-4 sm:py-1.5 sm:text-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand sm:h-4 sm:w-4" /> Built for African Sellers
           </span>
-          <h1 className="mt-3 font-display text-[clamp(1.95rem,6.5vw,2.6rem)] font-bold leading-[1.1] tracking-tight text-ink md:text-[2.4rem] lg:text-[3.25rem]">
+          <h1 className="mt-2 font-display text-[clamp(1.6rem,7vw,2.6rem)] font-bold leading-[1.1] tracking-tight text-ink md:mt-3 md:text-[2.4rem] lg:text-[3.25rem]">
             Your Store.<br />Your Brand.<br /><span className="text-brand">Your Freedom.</span>
           </h1>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-muted md:text-base">
+          <p className="mt-2 text-xs leading-relaxed text-muted sm:text-sm md:mt-3 md:max-w-md md:text-base">
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
-          <div className="mt-4 flex flex-nowrap items-center gap-3 lg:gap-4">
-            <Link href="/signup" className="inline-flex h-12 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-brand-grad px-5 text-sm font-semibold text-white shadow-glow transition active:scale-[0.98] lg:h-14 lg:px-7 lg:text-base">
+          <div className="mt-4 flex flex-wrap items-center gap-2 md:flex-nowrap md:gap-3 lg:gap-4">
+            <Link href="/signup" className="inline-flex h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-brand-grad px-4 text-[13px] font-semibold text-white shadow-glow transition active:scale-[0.98] md:h-12 md:px-5 md:text-sm lg:h-14 lg:px-7 lg:text-base">
               Create Your Store <ArrowRight className="h-4 w-4 shrink-0 lg:h-5 lg:w-5" />
             </Link>
-            <button className="flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-medium text-ink lg:gap-3 lg:text-base">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 lg:h-12 lg:w-12">
+            <button className="flex shrink-0 items-center gap-2 whitespace-nowrap text-[13px] font-medium text-ink md:text-sm lg:gap-3 lg:text-base">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 md:h-11 md:w-11 lg:h-12 lg:w-12">
                 <Play className="h-4 w-4 fill-ink" />
               </span>
               Watch Demo
@@ -247,7 +247,7 @@ export default function LandingPage() {
             <p className="min-w-0 flex-1 text-[12px] leading-snug text-muted sm:text-sm">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
-        <div className="mx-auto w-full max-w-[300px] sm:max-w-[330px] md:mx-0 md:max-w-none">
+        <div className="w-full md:mx-0 md:max-w-none">
           <div className="hidden lg:block">
             <StorePreview />
           </div>

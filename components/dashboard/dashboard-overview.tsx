@@ -27,7 +27,7 @@ const statIcons: Record<StatKey, LucideIcon> = {
   revenue: Wallet, orders: ShoppingBag, customers: Users, conversion: Percent,
 };
 
-const card = "rounded-2xl border border-white/[0.06] bg-surface";
+const card = "rounded-2xl border border-white/[0.06] bg-surface overflow-hidden";
 
 /* ───────────────────────── small primitives ───────────────────────── */
 function Delta({ value }: { value: string }) {
@@ -139,7 +139,7 @@ function SectionHead({ title, action = "View all" }: { title: string; action?: s
 }
 
 /* ───────────────────────── cards ───────────────────────── */
-function RevenueCard({ className }: { className?: string }) {
+function RevenueCard({ className, scroll }: { className?: string; scroll?: boolean }) {
   return (
     <div className={cn(card, "sov-in flex flex-col p-4 xl:p-5", className)}>
       <div className="flex items-center justify-between">
@@ -148,9 +148,17 @@ function RevenueCard({ className }: { className?: string }) {
           This Week <ChevronDown className="h-3.5 w-3.5" />
         </button>
       </div>
-      <div className="mt-3 h-[220px] min-h-0 md:h-auto md:flex-1">
-        <RevenueChart />
-      </div>
+      {scroll ? (
+        <div className="mt-3 overflow-x-auto no-scrollbar">
+          <div className="h-[240px] min-w-[560px]">
+            <RevenueChart />
+          </div>
+        </div>
+      ) : (
+        <div className="mt-3 min-h-0 flex-1">
+          <RevenueChart />
+        </div>
+      )}
     </div>
   );
 }
@@ -159,7 +167,7 @@ function RecentOrders({ className }: { className?: string }) {
   return (
     <div className={cn(card, "sov-in flex flex-col p-4 xl:p-5", className)}>
       <SectionHead title="Recent Orders" />
-      <div className="mt-3 flex flex-1 flex-col gap-3.5">
+      <div className="mt-3 flex min-h-0 flex-1 flex-col gap-3.5 overflow-hidden">
         {RECENT_ORDERS.map((o) => (
           <div key={o.id} className="flex items-start gap-3">
             <img src={o.img} alt="" className="h-10 w-10 shrink-0 rounded-lg object-cover" />
@@ -380,7 +388,7 @@ function SidebarBody() {
 
 function Sidebar() {
   return (
-    <aside className="hidden h-[100dvh] w-[236px] shrink-0 flex-col border-r border-line bg-surface-2/50 p-4 md:flex xl:w-[252px]">
+    <aside className="hidden h-[100dvh] w-[236px] shrink-0 flex-col border-r border-line bg-surface-2/50 p-4 lg:flex xl:w-[252px]">
       <SidebarBody />
     </aside>
   );
@@ -389,7 +397,7 @@ function Sidebar() {
 /* ───────────────────────── desktop / tablet header ───────────────────────── */
 function MainHeader({ onMenu }: { onMenu: () => void }) {
   return (
-    <header className="flex items-start justify-between gap-4">
+    <header className="flex flex-wrap items-start justify-between gap-3">
       <div className="min-w-0">
         <button
           onClick={onMenu}
@@ -405,7 +413,7 @@ function MainHeader({ onMenu }: { onMenu: () => void }) {
           Here&apos;s what&apos;s happening with {STORE.name} today.
         </p>
       </div>
-      <div className="flex shrink-0 items-center gap-2.5">
+      <div className="flex flex-wrap items-center justify-end gap-2.5">
         <StoreSwitcher />
         <DateRangePill />
         <BellButton />
@@ -428,7 +436,7 @@ function StatsRow() {
 /* ───────────────────────── mobile bars ───────────────────────── */
 function MobileTopBar({ onMenu }: { onMenu: () => void }) {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-line bg-canvas/90 px-4 backdrop-blur-md md:hidden">
+    <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-line bg-canvas/90 px-4 backdrop-blur-md lg:hidden">
       <div className="flex items-center gap-2.5">
         <button
           onClick={onMenu}
@@ -461,7 +469,7 @@ const MOBILE_TABS: { label: string; key: NavKey }[] = [
 
 function MobileBottomNav() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 h-[68px] border-t border-line bg-canvas/95 backdrop-blur-md md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 h-[68px] border-t border-line bg-canvas/95 backdrop-blur-md lg:hidden">
       <div className="mx-auto grid h-full max-w-md grid-cols-5 items-center px-2">
         {/* Overview */}
         <Tab item={MOBILE_TABS[0]} active />
@@ -513,14 +521,14 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
       {open && (
         <>
           <motion.div
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
           <motion.aside
-            className="fixed inset-y-0 left-0 z-50 flex w-[270px] flex-col border-r border-line bg-surface-2 p-4 md:hidden"
+            className="fixed inset-y-0 left-0 z-50 flex w-[270px] flex-col border-r border-line bg-surface-2 p-4 lg:hidden"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
@@ -544,9 +552,9 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
 /* ───────────────────────── layouts ───────────────────────── */
 function MobileLayout({ onMenu }: { onMenu: () => void }) {
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <MobileTopBar onMenu={onMenu} />
-      <main className="space-y-4 px-4 pb-[88px] pt-[76px]">
+      <main className="mx-auto max-w-[720px] space-y-4 px-4 pb-[88px] pt-[76px]">
         <StoreSwitcher full />
         <DateRangePill full />
         <div className="grid grid-cols-2 gap-3">
@@ -554,7 +562,7 @@ function MobileLayout({ onMenu }: { onMenu: () => void }) {
             <StatCard key={s.key} stat={s} i={i} />
           ))}
         </div>
-        <RevenueCard />
+        <RevenueCard scroll />
         <RecentOrders />
         <TopProducts />
         <AIAssistant />
@@ -568,7 +576,7 @@ function MobileLayout({ onMenu }: { onMenu: () => void }) {
 
 function TabletLayout({ onMenu }: { onMenu: () => void }) {
   return (
-    <div className="hidden h-[100dvh] overflow-hidden md:flex xl:hidden">
+    <div className="hidden h-[100dvh] overflow-hidden lg:flex xl:hidden">
       <Sidebar />
       <main className="flex h-[100dvh] min-w-0 flex-1 flex-col gap-4 overflow-hidden p-5">
         <MainHeader onMenu={onMenu} />

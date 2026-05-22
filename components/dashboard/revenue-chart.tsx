@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { CHART } from "@/lib/dashboard-mock";
 
 type P = { x: number; y: number };
@@ -26,6 +26,11 @@ function smoothPath(pts: P[]) {
 export function RevenueChart() {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 720, h: 300 });
+  // Unique, collision-free ids so multiple chart instances each paint their own gradients/filter.
+  const uid = useId().replace(/[:]/g, "");
+  const fillId = `revFill-${uid}`;
+  const lineId = `revLine-${uid}`;
+  const glowId = `revGlow-${uid}`;
 
   useEffect(() => {
     const el = ref.current;
@@ -46,7 +51,7 @@ export function RevenueChart() {
 
   const { w, h } = size;
   const padL = 46;
-  const padR = 16;
+  const padR = 22;
   const padT = 18;
   const padB = 28;
   const plotW = Math.max(10, w - padL - padR);
@@ -64,32 +69,30 @@ export function RevenueChart() {
   const last = pts[n - 1];
   const first = pts[0];
 
-  // y gridlines (one per tick label)
-  const tickCount = CHART.yTicks.length; // 6 → values 1.5M..0
+  const tickCount = CHART.yTicks.length;
   const yRows = CHART.yTicks.map((label, i) => ({
     label,
     y: padT + (plotH * i) / (tickCount - 1),
   }));
 
-  // tooltip placed above-left of the final point
   const tipW = 150;
-  const tipLeft = Math.min(Math.max(last.x - tipW + 18, padL), w - tipW - 6);
+  const tipLeft = Math.min(Math.max(last.x - tipW + 18, padL), Math.max(padL, w - tipW - 6));
   const tipTop = Math.max(last.y - 76, 4);
 
   return (
     <div ref={ref} className="relative h-full w-full">
       <svg width={w} height={h} className="block">
         <defs>
-          <linearGradient id="revFill" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={fillId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.38" />
             <stop offset="55%" stopColor="#0A84FF" stopOpacity="0.12" />
             <stop offset="100%" stopColor="#0A84FF" stopOpacity="0" />
           </linearGradient>
-          <linearGradient id="revLine" x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id={lineId} x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#38BDF8" />
             <stop offset="100%" stopColor="#0EA5FF" />
           </linearGradient>
-          <filter id="revGlow" x="-20%" y="-40%" width="140%" height="200%">
+          <filter id={glowId} x="-20%" y="-40%" width="140%" height="200%">
             <feGaussianBlur stdDeviation="5" result="b" />
             <feMerge>
               <feMergeNode in="b" />
@@ -98,73 +101,42 @@ export function RevenueChart() {
           </filter>
         </defs>
 
-        {/* horizontal gridlines + y labels */}
         {yRows.map((r, i) => (
           <g key={i}>
-            <line
-              x1={padL}
-              x2={w - padR}
-              y1={r.y}
-              y2={r.y}
-              stroke="rgba(255,255,255,0.06)"
-              strokeWidth={1}
-            />
-            <text
-              x={padL - 10}
-              y={r.y + 4}
-              textAnchor="end"
-              fontSize="11"
-              fill="#6B7686"
-              fontFamily="Inter, sans-serif"
-            >
+            <line x1={padL} x2={w - padR} y1={r.y} y2={r.y} stroke="rgba(255,255,255,0.06)" strokeWidth={1} />
+            <text x={padL - 10} y={r.y + 4} textAnchor="end" fontSize="11" fill="#6B7686" fontFamily="Inter, sans-serif">
               {r.label}
             </text>
           </g>
         ))}
 
-        {/* x labels */}
-        {CHART.xLabels.map((label, i) => (
-          <text
-            key={label}
-            x={pts[i].x}
-            y={baseline + 18}
-            textAnchor="middle"
-            fontSize="11"
-            fill="#6B7686"
-            fontFamily="Inter, sans-serif"
-          >
-            {label}
-          </text>
-        ))}
+        {CHART.xLabels.map((label, i) => {
+          const anchor = i === 0 ? "start" : i === n - 1 ? "end" : "middle";
+          return (
+            <text
+              key={label}
+              x={pts[i].x}
+              y={baseline + 18}
+              textAnchor={anchor}
+              fontSize="11"
+              fill="#6B7686"
+              fontFamily="Inter, sans-serif"
+            >
+              {label}
+            </text>
+          );
+        })}
 
-        {/* vertical guide at the active (last) point */}
-        <line
-          x1={last.x}
-          x2={last.x}
-          y1={last.y}
-          y2={baseline}
-          stroke="rgba(56,189,248,0.35)"
-          strokeWidth={1}
-          strokeDasharray="3 4"
-        />
+        <line x1={last.x} x2={last.x} y1={last.y} y2={baseline} stroke="rgba(56,189,248,0.35)" strokeWidth={1} strokeDasharray="3 4" />
 
-        <path d={area} fill="url(#revFill)" />
-        <path
-          d={line}
-          fill="none"
-          stroke="url(#revLine)"
-          strokeWidth={2.6}
-          strokeLinecap="round"
-          filter="url(#revGlow)"
-        />
+        <path d={area} fill={`url(#${fillId})`} />
+        <path d={line} fill="none" stroke={`url(#${lineId})`} strokeWidth={2.6} strokeLinecap="round" filter={`url(#${glowId})`} />
 
-        {/* endpoint dots */}
         <circle cx={first.x} cy={first.y} r={4.5} fill="#38BDF8" />
         <circle cx={last.x} cy={last.y} r={9} fill="#38BDF8" opacity={0.22} />
         <circle cx={last.x} cy={last.y} r={5} fill="#38BDF8" stroke="#0B1220" strokeWidth={2} />
       </svg>
 
-      {/* tooltip */}
       <div
         className="pointer-events-none absolute rounded-xl border border-white/10 bg-[#0B1220]/95 px-3 py-2 shadow-card backdrop-blur"
         style={{ left: tipLeft, top: tipTop, width: tipW }}

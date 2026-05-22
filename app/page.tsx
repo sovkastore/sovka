@@ -25,6 +25,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { SovcartLogo, SovcartMark } from "@/components/brand/logo";
+import { MobileNav } from "@/components/landing/mobile-nav";
 
 const NAV = ["Features", "Pricing", "Demo", "Resources"];
 
@@ -210,9 +211,7 @@ export default function LandingPage() {
           <Link href="/signup" className="inline-flex h-9 items-center gap-2 rounded-full bg-brand-grad px-3.5 text-[13px] font-semibold text-white shadow-glow lg:h-11 lg:px-5 lg:text-sm">
             Get Started <ArrowRight className="hidden h-4 w-4 lg:block" />
           </Link>
-          <button className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-ink lg:hidden">
-            <Menu className="h-4 w-4" />
-          </button>
+          <MobileNav items={NAV} />
         </div>
       </header>
 

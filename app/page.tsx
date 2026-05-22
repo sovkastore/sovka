@@ -198,8 +198,8 @@ export default function LandingPage() {
       <div className="pointer-events-none absolute -top-40 right-0 h-[480px] w-[480px] rounded-full bg-brand/20 blur-[120px]" />
       <div className="pointer-events-none absolute top-[420px] -left-40 h-[360px] w-[360px] rounded-full bg-brand/10 blur-[120px]" />
 
-      <header className="relative z-10 mx-auto flex max-w-content items-center justify-between px-5 py-4 lg:px-8">
-        <SovcartLogo size={36} />
+      <header className="relative z-10 mx-auto flex max-w-content items-center justify-between px-5 py-3 lg:px-8 lg:py-4">
+        <div className="origin-left scale-[0.82] md:scale-100"><SovcartLogo size={36} /></div>
         <nav className="hidden items-center gap-8 text-sm font-medium text-muted lg:flex">
           {NAV.map((n) => (
             <Link key={n} href="#" className="transition hover:text-ink">{n}</Link>
@@ -207,16 +207,16 @@ export default function LandingPage() {
         </nav>
         <div className="flex items-center gap-3">
           <Link href="/login" className="hidden text-sm font-semibold text-ink lg:block">Log in</Link>
-          <Link href="/signup" className="inline-flex h-11 items-center gap-2 rounded-full bg-brand-grad px-5 text-sm font-semibold text-white shadow-glow">
+          <Link href="/signup" className="inline-flex h-9 items-center gap-2 rounded-full bg-brand-grad px-3.5 text-[13px] font-semibold text-white shadow-glow lg:h-11 lg:px-5 lg:text-sm">
             Get Started <ArrowRight className="hidden h-4 w-4 lg:block" />
           </Link>
-          <button className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-ink lg:hidden">
-            <Menu className="h-5 w-5" />
+          <button className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-ink lg:hidden">
+            <Menu className="h-4 w-4" />
           </button>
         </div>
       </header>
 
-      <section className="relative isolate z-10 mx-auto grid min-h-[380px] max-w-content items-start gap-5 overflow-hidden px-5 pt-3 md:min-h-0 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:overflow-visible md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
+      <section className="relative isolate z-10 mx-auto grid min-h-[345px] max-w-content items-start gap-5 overflow-hidden px-5 pt-3 md:min-h-0 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:overflow-visible md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
         <div className="relative z-10">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-ink sm:gap-2 sm:px-4 sm:py-1.5 sm:text-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand sm:h-4 sm:w-4" /> Built for African Sellers
@@ -228,11 +228,11 @@ export default function LandingPage() {
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
           <div className="mt-4 flex flex-nowrap items-center gap-3 lg:gap-4">
-            <Link href="/signup" className="inline-flex h-12 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-grad px-4 text-sm font-semibold text-white shadow-glow transition active:scale-[0.98] lg:h-14 lg:gap-2 lg:px-7 lg:text-base">
+            <Link href="/signup" className="inline-flex h-10 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-grad px-3.5 text-[13px] font-semibold text-white shadow-glow transition active:scale-[0.98] lg:h-14 lg:gap-2 lg:px-7 lg:text-base">
               Create Your Store <ArrowRight className="h-4 w-4 shrink-0 lg:h-5 lg:w-5" />
             </Link>
-            <button className="flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-medium text-ink lg:gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 lg:h-12 lg:w-12">
+            <button className="flex shrink-0 items-center gap-2 whitespace-nowrap text-[13px] font-medium text-ink lg:gap-3 lg:text-base">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 lg:h-12 lg:w-12">
                 <Play className="h-4 w-4 fill-ink" />
               </span>
               Watch Demo
@@ -247,7 +247,7 @@ export default function LandingPage() {
             <p className="min-w-0 flex-1 text-[12px] leading-snug text-muted sm:text-sm">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
-        <div className="pointer-events-none absolute -right-5 top-1 z-0 w-[300px] origin-top-right md:pointer-events-auto md:static md:right-auto md:top-auto md:z-auto md:w-auto md:origin-center">
+        <div className="pointer-events-none absolute right-0 top-2 z-0 w-[300px] origin-top-right md:pointer-events-auto md:static md:right-auto md:top-auto md:z-auto md:w-auto md:origin-center">
           <div className="hidden lg:block">
             <StorePreview />
           </div>

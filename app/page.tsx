@@ -218,13 +218,13 @@ export default function LandingPage() {
 
       <section className="relative isolate z-10 mx-auto grid min-h-[380px] max-w-content items-start gap-5 overflow-hidden px-5 pt-3 md:min-h-0 md:grid-cols-[48fr_52fr] md:items-center md:gap-7 md:overflow-visible md:px-8 md:pt-4 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
         <div className="relative z-10">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-ink">
-            <Sparkles className="h-4 w-4 text-brand" /> Built for African Sellers
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-ink sm:gap-2 sm:px-4 sm:py-1.5 sm:text-sm">
+            <Sparkles className="h-3.5 w-3.5 text-brand sm:h-4 sm:w-4" /> Built for African Sellers
           </span>
-          <h1 className="mt-3 max-w-[54%] font-display text-[1.85rem] font-bold leading-[1.08] tracking-tight text-ink sm:text-[2.6rem] md:max-w-none md:text-[2.4rem] lg:text-[3.25rem]">
+          <h1 className="mt-3 max-w-[52%] font-display text-[1.55rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.6rem] md:max-w-none md:text-[2.4rem] lg:text-[3.25rem]">
             Your Store.<br />Your Brand.<br /><span className="text-brand">Your Freedom.</span>
           </h1>
-          <p className="mt-2.5 max-w-[54%] text-[12px] leading-relaxed text-muted sm:text-sm md:max-w-md md:text-base">
+          <p className="mt-2 max-w-[52%] text-[11px] leading-relaxed text-muted sm:text-sm md:max-w-md md:text-base">
             Create a beautiful online store in minutes, get paid securely, and grow your business with Sovcart.
           </p>
           <div className="mt-4 flex flex-nowrap items-center gap-3 lg:gap-4">
@@ -244,7 +244,7 @@ export default function LandingPage() {
                 <img key={src} src={src} alt="" className="h-8 w-8 rounded-full border-2 border-canvas object-cover" />
               ))}
             </div>
-            <p className="min-w-0 flex-1 text-sm leading-snug text-muted">Join 2,000+ sellers growing with Sovcart</p>
+            <p className="min-w-0 flex-1 text-[12px] leading-snug text-muted sm:text-sm">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
         <div className="pointer-events-none absolute -right-5 top-1 z-0 w-[300px] origin-top-right md:pointer-events-auto md:static md:right-auto md:top-auto md:z-auto md:w-auto md:origin-center">

@@ -9,32 +9,25 @@ export function SovcartMark({ size = 36, className }: { size?: number; className
         className
       )}
     >
-      <svg viewBox="0 0 32 32" width={size * 0.68} height={size * 0.68} fill="none">
-        {/* bag handle */}
+      <svg viewBox="0 0 32 32" width={size * 0.72} height={size * 0.72} fill="none">
+        {/* handle arch above the bag */}
         <path
-          d="M11 13V11a5 5 0 0 1 10 0v2"
+          d="M11.4 13.4v-2.8a4.6 4.6 0 0 1 9.2 0v2.8"
           stroke="white"
-          strokeWidth="2"
+          strokeWidth="2.2"
           strokeLinecap="round"
         />
-        {/* bag body */}
-        <path
-          d="M8.8 13h14.4l-1 11.4a2.2 2.2 0 0 1-2.2 2H12a2.2 2.2 0 0 1-2.2-2L8.8 13Z"
-          fill="white"
-          fillOpacity="0.18"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinejoin="round"
-        />
-        {/* S */}
+        {/* rounded bucket bag body (solid white) */}
+        <rect x="8.8" y="12.4" width="14.4" height="13.4" rx="3.8" fill="white" />
+        {/* bold blue S */}
         <text
           x="16"
-          y="23"
+          y="23.2"
           textAnchor="middle"
           fontFamily="Poppins, Inter, sans-serif"
-          fontSize="12"
+          fontSize="12.5"
           fontWeight="800"
-          fill="white"
+          fill="#0A84FF"
         >
           S
         </text>

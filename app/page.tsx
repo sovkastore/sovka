@@ -280,15 +280,12 @@ export default function LandingPage() {
         </div>
         <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {FEATURES.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-surface p-3.5 transition hover:border-brand/40 sm:rounded-3xl sm:p-4 lg:flex-col lg:gap-2.5">
+            <div key={title} className="flex flex-col items-start gap-2.5 rounded-2xl border border-white/10 bg-surface p-3.5 transition hover:border-brand/40 sm:rounded-3xl sm:p-4">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand/10 text-brand sm:h-12 sm:w-12">
                 <Icon className="h-6 w-6" />
               </span>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold leading-tight text-ink sm:text-base">{title}</p>
-                  <ChevronRight className="h-4 w-4 text-muted lg:hidden" />
-                </div>
+              <div className="w-full">
+                <p className="text-sm font-semibold leading-tight text-ink sm:text-base">{title}</p>
                 <p className="mt-1 text-[11px] leading-relaxed text-muted sm:text-sm">{desc}</p>
               </div>
             </div>

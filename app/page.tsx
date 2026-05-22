@@ -216,7 +216,7 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative isolate z-10 mx-auto grid grid-cols-[1fr_40%] max-w-content items-center gap-4 px-5 pt-4 md:grid-cols-[48fr_52fr] md:gap-7 md:px-8 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
+      <section className="relative isolate z-10 mx-auto grid grid-cols-1 max-w-content items-start gap-7 px-5 pt-4 min-[540px]:grid-cols-[1fr_40%] min-[540px]:items-center min-[540px]:gap-4 md:grid-cols-[48fr_52fr] md:gap-7 md:px-8 lg:grid-cols-[43fr_57fr] lg:gap-10 lg:pt-6">
         <div className="relative z-10">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-ink sm:gap-2 sm:px-4 sm:py-1.5 sm:text-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand sm:h-4 sm:w-4" /> Built for African Sellers
@@ -247,7 +247,7 @@ export default function LandingPage() {
             <p className="min-w-0 flex-1 text-[12px] leading-snug text-muted sm:text-sm">Join 2,000+ sellers growing with Sovcart</p>
           </div>
         </div>
-        <div className="w-full md:mx-0 md:max-w-none">
+        <div className="mx-auto w-full max-w-[340px] min-[540px]:mx-0 min-[540px]:max-w-none">
           <div className="hidden lg:block">
             <StorePreview />
           </div>

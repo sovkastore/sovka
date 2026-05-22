@@ -17,3 +17,6 @@ h1, h2, h3, h4, .font-display { font-family: Poppins, Inter, sans-serif; }
 ::selection { background: rgba(14,165,255,0.35); }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes sov-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.sov-in { animation: sov-fade 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }

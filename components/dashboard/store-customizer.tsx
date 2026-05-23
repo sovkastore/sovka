@@ -563,7 +563,18 @@ function MobileSaveBar() {
 }
 
 /* ─── layouts ─── */
+const MOBILE_SECTIONS = [
+  { key: "identity", label: "Brand Identity" },
+  { key: "preview",  label: "Live Preview" },
+  { key: "colors",   label: "Brand Colors" },
+  { key: "typography", label: "Typography" },
+  { key: "settings", label: "Other Settings" },
+  { key: "ai",       label: "AI Assistant" },
+] as const;
+type MobileSection = typeof MOBILE_SECTIONS[number]["key"];
+
 function MobileLayout({ onMenu, activeTab, setActiveTab }: { onMenu: () => void; activeTab: string; setActiveTab: (k: string) => void }) {
+  const [mobileSection, setMobileSection] = useState<MobileSection>("identity");
   return (
     <MobileShell activeKey="settings" onMenu={onMenu}>
       <div className="space-y-4 px-4 pt-4 pb-8">
@@ -581,7 +592,7 @@ function MobileLayout({ onMenu, activeTab, setActiveTab }: { onMenu: () => void;
           </span>
           <ChevronDown className="h-4 w-4 text-muted" />
         </button>
-        {/* tabs */}
+        {/* main tab bar */}
         <div className="flex overflow-x-auto no-scrollbar gap-1.5">
           {TABS.map((t) => (
             <button key={t.key} onClick={() => setActiveTab(t.key)}
@@ -591,26 +602,47 @@ function MobileLayout({ onMenu, activeTab, setActiveTab }: { onMenu: () => void;
             </button>
           ))}
         </div>
+
         {activeTab === "branding" ? (
-          <div className="grid grid-cols-2 gap-3">
-            {/* left col */}
-            <div className="space-y-3">
-              <BrandIdentitySection />
-              <BannerSection />
+          <>
+            {/* section switcher — same pill pattern as main tabs */}
+            <div className="flex overflow-x-auto no-scrollbar gap-1.5">
+              {MOBILE_SECTIONS.map((s) => (
+                <button
+                  key={s.key}
+                  onClick={() => setMobileSection(s.key)}
+                  className={cn(
+                    "shrink-0 rounded-xl px-3.5 py-2 text-[12px] font-medium transition-colors",
+                    mobileSection === s.key
+                      ? "bg-surface border border-line text-ink"
+                      : "text-muted hover:text-ink"
+                  )}
+                >
+                  {s.label}
+                </button>
+              ))}
             </div>
-            {/* right col */}
-            <div className="space-y-3">
-              <LivePreviewPanel />
-              <BrandColorsSection />
-              <TypographySection />
-              <OtherSettingsSection />
+
+            {/* single full-width section */}
+            <div>
+              {mobileSection === "identity"   && <BrandIdentitySection />}
+              {mobileSection === "preview"    && <LivePreviewPanel className="min-h-[420px]" />}
+              {mobileSection === "colors"     && <BrandColorsSection />}
+              {mobileSection === "typography" && <TypographySection />}
+              {mobileSection === "settings"   && <OtherSettingsSection />}
+              {mobileSection === "ai"         && <AIAssistantSection />}
             </div>
-          </div>
+
+            {/* banner always shown under identity for context */}
+            {mobileSection === "identity" && <BannerSection />}
+
+            <MobileSaveBar />
+          </>
         ) : (
-          <div className="flex h-48 items-center justify-center"><TabPlaceholder tab={TABS.find(t => t.key === activeTab)?.label ?? ''}/></div>
+          <div className="flex h-48 items-center justify-center">
+            <TabPlaceholder tab={TABS.find(t => t.key === activeTab)?.label ?? ''} />
+          </div>
         )}
-        {activeTab === "branding" && <AIAssistantSection />}
-        {activeTab === "branding" && <MobileSaveBar />}
       </div>
     </MobileShell>
   );

@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { SovcartLogo } from "@/components/brand/logo";
 import { NAV, SELLER, type NavKey } from "@/lib/dashboard-mock";
 
-export const card = "rounded-2xl border border-white/[0.06] bg-surface overflow-hidden";
+export const card = "rounded-2xl border border-white/[0.06] bg-surface";
 
 export const navIcons: Record<NavKey, LucideIcon> = {
   home: Home, orders: ShoppingBag, products: Tag, customers: Users,

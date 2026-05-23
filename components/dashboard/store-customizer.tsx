@@ -568,13 +568,13 @@ type Device = "phone" | "desktop";
 function LivePreviewPanel({ className }: { className?: string }) {
   const [device, setDevice] = useState<Device>("desktop");
   const containerRef = useRef<HTMLDivElement>(null);
-  const [panelWidth, setPanelWidth] = useState(450);
+  const [panelSize, setPanelSize] = useState({ w: 450, h: 560 });
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
     const ro = new ResizeObserver(([entry]) => {
-      setPanelWidth(entry.contentRect.width);
+      setPanelSize({ w: entry.contentRect.width, h: entry.contentRect.height });
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -582,18 +582,15 @@ function LivePreviewPanel({ className }: { className?: string }) {
 
   const mobileInnerW = 375;
   const desktopInnerW = 900;
-  const mobileScale = panelWidth / mobileInnerW;
-  const desktopScale = panelWidth / desktopInnerW;
-
-  // height of the visible clip area (fixed)
-  const previewH = 400;
-  // inner content rendered height (before scale) for each mode
-  const mobileInnerH = previewH / mobileScale;
-  const desktopInnerH = previewH / desktopScale;
+  const mobileScale = panelSize.w / mobileInnerW;
+  const desktopScale = panelSize.w / desktopInnerW;
+  // inner div height set so that (h × scale) === container height → fills edge-to-edge
+  const mobileInnerH = panelSize.h / mobileScale;
+  const desktopInnerH = panelSize.h / desktopScale;
 
   return (
     <div className={cn(card, "flex flex-col p-4", className)}>
-      <div className="flex items-center justify-between">
+      <div className="flex shrink-0 items-center justify-between">
         <h3 className="font-display text-[14px] font-semibold text-ink">Live Preview</h3>
         <div className="flex items-center gap-0.5 rounded-lg border border-line p-1">
           {([{ key: "phone" as const, icon: Smartphone, label: "Mobile" }, { key: "desktop" as const, icon: Monitor, label: "Desktop" }]).map(({ key, icon: Icon, label }) => (
@@ -606,33 +603,31 @@ function LivePreviewPanel({ className }: { className?: string }) {
         </div>
       </div>
 
-      {/* edge-to-edge preview container */}
-      <div ref={containerRef} className="relative mt-4 w-full overflow-hidden rounded-xl border border-line bg-canvas"
-        style={{ height: previewH }}>
+      {/* flex-1 → fills all remaining height in the card column */}
+      <div ref={containerRef}
+        className="relative mt-4 flex-1 w-full overflow-hidden rounded-xl border border-line bg-canvas">
         {device === "phone" ? (
           <div style={{
             width: mobileInnerW,
+            height: mobileInnerH,
             transform: `scale(${mobileScale})`,
             transformOrigin: "top left",
-            height: mobileInnerH,
-            overflow: "hidden",
           }}>
             <MiniMobilePreview />
           </div>
         ) : (
           <div style={{
             width: desktopInnerW,
+            height: desktopInnerH,
             transform: `scale(${desktopScale})`,
             transformOrigin: "top left",
-            height: desktopInnerH,
-            overflow: "hidden",
           }}>
             <MiniDesktopPreview />
           </div>
         )}
       </div>
 
-      <p className="mt-2 text-center text-[10px] text-muted">Preview updates on save</p>
+      <p className="mt-2 shrink-0 text-center text-[10px] text-muted">Preview updates on save</p>
     </div>
   );
 }

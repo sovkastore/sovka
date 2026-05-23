@@ -11,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { SovcartLogo, SovcartMark } from "@/components/brand/logo";
 import { RevenueChart } from "@/components/dashboard/revenue-chart";
-import { card, Avatar, Sidebar, MobileTopBar, MobileBottomNav, MobileDrawer } from "@/components/dashboard/shell";
+import { card, Avatar, Sidebar, MobileShell, MobileDrawer } from "@/components/dashboard/shell";
 import {
   STORE, SELLER, DATE_RANGE, COMPARE, STATS, RECENT_ORDERS, TOP_PRODUCTS,
   TOP_PRODUCTS_MAX, AI_CHIPS, SUGGESTIONS, UPGRADE_FEATURES, NAV,
@@ -337,9 +337,8 @@ function StatsRow() {
 /* ───────────────────────── layouts ───────────────────────── */
 function MobileLayout({ onMenu }: { onMenu: () => void }) {
   return (
-    <div className="lg:hidden">
-      <MobileTopBar onMenu={onMenu} />
-      <main className="mx-auto max-w-[720px] space-y-4 px-4 pb-[88px] pt-[76px]">
+    <MobileShell activeKey="home" onMenu={onMenu}>
+      <div className="mx-auto max-w-[720px] space-y-4 px-4 pt-4 pb-9">
         <StoreSwitcher full />
         <DateRangePill full />
         <div className="grid grid-cols-2 gap-3">
@@ -353,9 +352,8 @@ function MobileLayout({ onMenu }: { onMenu: () => void }) {
         <AIAssistant />
         <Suggestions />
         <UpgradeCard variant="mini" />
-      </main>
-      <MobileBottomNav activeKey="home" />
-    </div>
+      </div>
+    </MobileShell>
   );
 }
 

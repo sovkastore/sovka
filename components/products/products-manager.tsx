@@ -8,7 +8,7 @@ import {
   Copy, Pencil, MoreVertical, Bell, Sparkles, ArrowRight, X, FileText, Film, Menu,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Avatar, card, Sidebar, MobileTopBar, MobileBottomNav, MobileDrawer } from "@/components/dashboard/shell";
+import { Avatar, card, Sidebar, MobileShell, MobileDrawer } from "@/components/dashboard/shell";
 import { SELLER } from "@/lib/dashboard-mock";
 import {
   PRODUCTS, DESKTOP_TABS, TABLET_TABS, EDITOR_CATEGORIES, EDITOR_MEDIA, STOCK_LABEL,
@@ -695,10 +695,10 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
 
 function MobileLayout({ onMenu, onOpenSheet, sheetOpen, onCloseSheet }: { onMenu: () => void; onOpenSheet: () => void; sheetOpen: boolean; onCloseSheet: () => void }) {
   return (
-    <div className="lg:hidden">
-      <MobileTopBar onMenu={onMenu} tagline={false} showSearch />
-      <main className="mx-auto max-w-[720px] space-y-4 px-4 pb-[200px] pt-[76px]">
-        <div className="flex items-start justify-between gap-3">
+    <>
+      <MobileShell activeKey="products" onMenu={onMenu} tagline={false} showSearch>
+        <div className="mx-auto max-w-[720px] space-y-4 px-4 pt-4 pb-9">
+          <div className="flex items-start justify-between gap-3">
           <div>
             <h1 className="font-display text-[24px] font-bold text-ink">Products</h1>
             <p className="mt-1 text-[13px] text-muted">Manage your products, inventory and variants.</p>
@@ -724,10 +724,10 @@ function MobileLayout({ onMenu, onOpenSheet, sheetOpen, onCloseSheet }: { onMenu
         <div className="space-y-3">
           {MOBILE_PRODUCTS.map((p) => <MobileRow key={p.id} p={p} onOpen={onOpenSheet} />)}
         </div>
-      </main>
+        </div>
+      </MobileShell>
       <MobileSheet open={sheetOpen} onClose={onCloseSheet} />
-      <MobileBottomNav activeKey="products" />
-    </div>
+    </>
   );
 }
 

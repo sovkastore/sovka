@@ -7,6 +7,7 @@ import {
   Home, ShoppingBag, Tag, Users, BarChart3, Megaphone, Ticket, Star,
   LayoutGrid, Settings, ChevronDown, Bell, ArrowRight, Plus, Crown, Menu, X, Search,
 } from "lucide-react";
+import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { SovcartLogo } from "@/components/brand/logo";
 import { NAV, SELLER, type NavKey } from "@/lib/dashboard-mock";
@@ -140,7 +141,7 @@ export function MobileTopBar({
   showSearch?: boolean;
 }) {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-line bg-canvas px-4 lg:hidden">
+    <header className="flex h-16 shrink-0 items-center justify-between border-b border-line bg-canvas px-4">
       <div className="flex items-center gap-2.5">
         <button
           onClick={onMenu}
@@ -204,7 +205,7 @@ function Tab({ item, active, badge }: { item: { label: string; key: NavKey }; ac
 
 export function MobileBottomNav({ activeKey }: { activeKey: NavKey }) {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 h-[68px] border-t border-line bg-canvas lg:hidden">
+    <nav className="h-[68px] shrink-0 border-t border-line bg-canvas">
       <div className="mx-auto grid h-full max-w-md grid-cols-5 items-center px-2">
         <Tab item={MOBILE_TABS[0]} active={activeKey === "home"} />
         <Tab item={MOBILE_TABS[1]} badge={24} active={activeKey === "orders"} />
@@ -217,6 +218,28 @@ export function MobileBottomNav({ activeKey }: { activeKey: NavKey }) {
         <Tab item={MOBILE_TABS[3]} active={activeKey === "customers"} />
       </div>
     </nav>
+  );
+}
+
+export function MobileShell({
+  activeKey,
+  onMenu,
+  showSearch = false,
+  tagline = true,
+  children,
+}: {
+  activeKey: NavKey;
+  onMenu: () => void;
+  showSearch?: boolean;
+  tagline?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex h-[100dvh] flex-col overflow-hidden lg:hidden">
+      <MobileTopBar onMenu={onMenu} showSearch={showSearch} tagline={tagline} />
+      <main className="flex-1 overflow-y-auto overscroll-contain">{children}</main>
+      <MobileBottomNav activeKey={activeKey} />
+    </div>
   );
 }
 

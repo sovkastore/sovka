@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, Filter, ArrowUpDown, Plus, Download, Upload, ChevronDown, ChevronLeft,
@@ -613,16 +613,29 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
   const s = MOBILE_SHEET;
   const [tab, setTab] = useState("Overview");
   const tabs = ["Overview", `Variants ${s.variants}`, "Inventory", "Pricing"];
+  useEffect(() => {
+    if (open) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
-          className="fixed inset-x-0 bottom-[68px] z-30 mx-auto max-w-[720px] rounded-t-3xl border-t border-white/10 bg-surface px-4 pb-4 pt-3 shadow-card lg:hidden"
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "100%" }}
-          transition={{ type: "spring", stiffness: 300, damping: 32 }}
-        >
+        <>
+          <motion.div
+            className="fixed inset-0 z-30 bg-black/55 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+          />
+          <motion.div
+            className="fixed inset-x-0 bottom-[68px] z-40 mx-auto max-w-[720px] rounded-t-3xl border-t border-white/10 bg-surface px-4 pb-4 pt-3 shadow-card lg:hidden"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 32 }}
+          >
           <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/15" />
           <div className="flex items-center gap-3">
             <img src={s.img} alt="" className="h-11 w-11 shrink-0 rounded-lg object-cover" />
@@ -674,6 +687,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
             </div>
           </div>
         </motion.div>
+        </>
       )}
     </AnimatePresence>
   );
@@ -721,7 +735,7 @@ function MobileLayout({ onMenu, onOpenSheet, sheetOpen, onCloseSheet }: { onMenu
 export function ProductsManager() {
   const [selectedId, setSelectedId] = useState(PRODUCTS[0].id);
   const [drawer, setDrawer] = useState(false);
-  const [sheet, setSheet] = useState(true);
+  const [sheet, setSheet] = useState(false);
   return (
     <div className="min-h-[100dvh] bg-canvas text-ink">
       <MobileLayout

@@ -140,7 +140,7 @@ export function MobileTopBar({
   showSearch?: boolean;
 }) {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-line bg-canvas/90 px-4 backdrop-blur-md lg:hidden">
+    <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-line bg-canvas px-4 lg:hidden">
       <div className="flex items-center gap-2.5">
         <button
           onClick={onMenu}
@@ -204,7 +204,7 @@ function Tab({ item, active, badge }: { item: { label: string; key: NavKey }; ac
 
 export function MobileBottomNav({ activeKey }: { activeKey: NavKey }) {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 h-[68px] border-t border-line bg-canvas/95 backdrop-blur-md lg:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 h-[68px] border-t border-line bg-canvas lg:hidden">
       <div className="mx-auto grid h-full max-w-md grid-cols-5 items-center px-2">
         <Tab item={MOBILE_TABS[0]} active={activeKey === "home"} />
         <Tab item={MOBILE_TABS[1]} badge={24} active={activeKey === "orders"} />
@@ -226,7 +226,7 @@ export function MobileDrawer({ open, onClose, activeKey }: { open: boolean; onCl
       {open && (
         <>
           <motion.div
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-50 bg-black/70 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, ShoppingBag, Tag, Users, BarChart3, Megaphone, Ticket, Boxes,
@@ -395,75 +395,69 @@ function AIAssistantSection() {
   );
 }
 
-/* ─── mini storefront preview ─── */
-function MiniStorefrontPreview() {
+/* ─── mini mobile preview (375px, scales UP to fill panel) ─── */
+function MiniMobilePreview() {
   return (
-    <div className="w-full bg-canvas text-ink">
-      {/* announcement */}
-      <div className="border-b border-line bg-surface-2/60 py-1 text-center text-[4px] text-muted">
+    <div style={{ width: 375 }} className="bg-canvas text-ink">
+      <div className="border-b border-line bg-surface-2/60 py-1.5 text-center text-[6px] text-muted">
         🚚 Free shipping on orders over ₦50,000
       </div>
-      {/* header */}
-      <div className="flex items-center justify-between border-b border-line px-2 py-1.5">
-        <div className="h-2 w-2 rounded-sm bg-surface-2" />
-        <span className="font-display text-[6px] font-bold tracking-[0.18em] text-ink">LUXE WEARS</span>
-        <div className="flex gap-1">
-          <div className="h-2 w-2 rounded-sm bg-surface-2" />
-          <div className="h-2 w-2 rounded-sm bg-surface-2" />
+      <div className="flex items-center justify-between border-b border-line px-3 py-2">
+        <div className="h-3 w-3 rounded-sm bg-surface-2" />
+        <span className="font-display text-[9px] font-bold tracking-[0.18em] text-ink">LUXE WEARS</span>
+        <div className="flex gap-1.5">
+          <div className="h-3 w-3 rounded-sm bg-surface-2" />
+          <div className="h-3 w-3 rounded-sm bg-surface-2" />
         </div>
       </div>
-      {/* hero */}
-      <div className="relative overflow-hidden bg-[#091525]" style={{ height: 90 }}>
-        <img src="/products/hero.webp" className="absolute right-0 top-0 h-full w-[50%] object-cover object-top" alt="" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #0B1220 35%, rgba(11,18,32,0.5) 55%, transparent)" }} />
-        <div className="absolute inset-0 flex flex-col justify-center px-2">
-          <span className="mb-0.5 w-fit rounded-sm border border-brand-400/50 px-1 py-0.5 text-[3.5px] font-semibold uppercase tracking-wide text-brand-400">NEW ARRIVALS</span>
-          <p className="font-display text-[7px] font-bold leading-tight text-ink">Elevate Your<br />Everyday Style</p>
-          <p className="mt-0.5 text-[3.5px] text-muted">Premium pieces. Timeless confidence.</p>
-          <button className="mt-1 w-fit rounded-sm bg-brand px-1.5 py-0.5 text-[3.5px] font-semibold text-white">Shop Now</button>
+      <div className="relative overflow-hidden bg-[#091525]" style={{ height: 140 }}>
+        <img src="/products/hero.webp" className="absolute right-0 top-0 h-full w-[52%] object-cover object-top" alt="" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right,#0B1220 38%,rgba(11,18,32,0.6) 58%,transparent)" }} />
+        <div className="absolute inset-0 flex flex-col justify-center px-4">
+          <span className="mb-1 w-fit rounded border border-brand-400/50 px-1.5 py-0.5 text-[5px] font-semibold uppercase tracking-wide text-brand-400">NEW ARRIVALS</span>
+          <p className="font-display text-[11px] font-bold leading-tight text-ink">Elevate Your<br />Everyday Style</p>
+          <p className="mt-1 text-[5.5px] text-muted">Premium pieces. Timeless confidence.</p>
+          <button className="mt-2 w-fit rounded bg-brand px-2.5 py-1 text-[5.5px] font-semibold text-white">Shop Now</button>
         </div>
       </div>
-      {/* categories */}
-      <div className="px-2 py-2">
-        <div className="mb-1 flex items-center justify-between">
-          <span className="text-[5px] font-semibold text-ink">Categories</span>
-          <span className="text-[4px] text-brand-400">View all</span>
+      <div className="px-3 py-3">
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-[7px] font-semibold text-ink">Categories</span>
+          <span className="text-[6px] text-brand-400">View all</span>
         </div>
-        <div className="flex gap-1">
+        <div className="flex gap-1.5">
           {[
             { l: "T-Shirts", img: "/products/tshirt-black.webp" },
             { l: "Hoodies", img: "/products/hoodie-grey.webp" },
             { l: "Sneakers", img: "/products/sneakers-white.webp" },
             { l: "Pants", img: "/products/cargo-olive.webp" },
-            { l: "Access.", img: "/products/cap-black.webp" },
           ].map((c) => (
             <div key={c.l} className="flex flex-1 flex-col items-center">
-              <div className="aspect-square w-full overflow-hidden rounded-md bg-surface-2">
+              <div className="aspect-square w-full overflow-hidden rounded-lg bg-surface-2">
                 <img src={c.img} className="h-full w-full object-cover" alt="" />
               </div>
-              <span className="mt-0.5 text-[3.5px] text-ink">{c.l}</span>
+              <span className="mt-1 text-[5px] text-ink">{c.l}</span>
             </div>
           ))}
         </div>
       </div>
-      {/* featured */}
-      <div className="px-2 pb-2">
-        <div className="mb-1 flex items-center justify-between">
-          <span className="text-[5px] font-semibold text-ink">Featured Products</span>
-          <span className="text-[4px] text-brand-400">View all</span>
+      <div className="px-3 pb-3">
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-[7px] font-semibold text-ink">Featured Products</span>
+          <span className="text-[6px] text-brand-400">View all</span>
         </div>
-        <div className="flex gap-1">
+        <div className="flex gap-1.5">
           {[
             { n: "Canvas Sneakers White", p: "₦24,000", img: "/products/sneakers-white.webp" },
             { n: "T-Shirt Oversized Black", p: "₦18,500", img: "/products/tshirt-black.webp" },
             { n: "Hoodie Premium Grey", p: "₦22,000", img: "/products/hoodie-grey.webp" },
           ].map((prod) => (
             <div key={prod.n} className="flex-1">
-              <div className="aspect-square overflow-hidden rounded-md bg-surface-2">
+              <div className="aspect-square overflow-hidden rounded-lg bg-surface-2">
                 <img src={prod.img} className="h-full w-full object-cover" alt="" />
               </div>
-              <p className="mt-0.5 text-[3.5px] leading-tight text-ink">{prod.n}</p>
-              <p className="text-[4px] font-semibold text-ink">{prod.p}</p>
+              <p className="mt-1 text-[5px] leading-tight text-ink">{prod.n}</p>
+              <p className="text-[6px] font-semibold text-ink">{prod.p}</p>
             </div>
           ))}
         </div>
@@ -472,63 +466,173 @@ function MiniStorefrontPreview() {
   );
 }
 
-/* ─── live preview panel ─── */
-type Device = "phone" | "tablet" | "desktop";
+/* ─── mini desktop preview (900px, scales DOWN to fill panel) ─── */
+const CATS = [
+  { l: "T-Shirts", img: "/products/tshirt-black.webp" },
+  { l: "Hoodies", img: "/products/hoodie-grey.webp" },
+  { l: "Sneakers", img: "/products/sneakers-white.webp" },
+  { l: "Pants", img: "/products/cargo-olive.webp" },
+  { l: "Accessories", img: "/products/cap-black.webp" },
+];
+const PRODS = [
+  { n: "Canvas Sneakers White", p: "₦24,000", r: "4.7", rc: "224", img: "/products/sneakers-white.webp" },
+  { n: "T-Shirt Oversized Black", p: "₦18,500", r: "4.6", rc: "98", img: "/products/tshirt-black.webp" },
+  { n: "Hoodie Premium Grey", p: "₦22,000", r: "4.8", rc: "74", img: "/products/hoodie-grey.webp" },
+];
+
+function MiniDesktopPreview() {
+  return (
+    <div style={{ width: 900 }} className="bg-canvas text-ink">
+      {/* browser chrome */}
+      <div className="flex items-center gap-1.5 border-b border-white/10 bg-surface-2 px-3 py-2">
+        <div className="h-2 w-2 rounded-full bg-danger" />
+        <div className="h-2 w-2 rounded-full bg-warning" />
+        <div className="h-2 w-2 rounded-full bg-success" />
+        <div className="ml-3 flex-1 rounded bg-white/5 px-3 py-1 text-[8px] text-muted">luxe-wears.sovcart.com</div>
+      </div>
+      {/* announcement */}
+      <div className="border-b border-line bg-surface-2/60 py-1 text-center text-[8px] text-muted">
+        🚚 Free shipping on orders over ₦50,000
+      </div>
+      {/* header */}
+      <div className="flex items-center justify-between border-b border-line px-8 py-3">
+        <div className="h-3 w-3 rounded-sm bg-surface-2" />
+        <span className="font-display text-[13px] font-bold tracking-[0.22em] text-ink">LUXE WEARS</span>
+        <div className="flex gap-3">
+          <div className="h-3 w-3 rounded-sm bg-surface-2" />
+          <div className="relative h-3 w-3 rounded-sm bg-surface-2">
+            <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5 items-center justify-center rounded-full bg-brand text-[4px] font-bold text-white">2</span>
+          </div>
+        </div>
+      </div>
+      {/* hero */}
+      <div className="relative overflow-hidden bg-[#091525]" style={{ height: 200 }}>
+        <img src="/products/hero.webp" className="absolute right-0 top-0 h-full w-[45%] object-cover object-top" alt="" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right,#0B1220 42%,rgba(11,18,32,0.5) 60%,transparent)" }} />
+        <div className="absolute inset-0 flex flex-col justify-center px-10">
+          <span className="mb-2 w-fit rounded border border-brand-400/50 px-2 py-1 text-[7px] font-semibold uppercase tracking-widest text-brand-400">NEW ARRIVALS</span>
+          <p className="font-display text-[22px] font-bold leading-tight text-ink">Elevate Your<br />Everyday Style</p>
+          <p className="mt-1.5 text-[9px] text-muted">Premium pieces. Timeless confidence.</p>
+          <button className="mt-3 w-fit rounded-lg bg-brand px-5 py-2 text-[9px] font-semibold text-white">Shop Now</button>
+          <div className="mt-4 flex gap-1.5">
+            {[1,2,3,4].map(i => <div key={i} className={cn("h-1.5 w-1.5 rounded-full", i===1 ? "bg-brand-400" : "bg-white/20")} />)}
+          </div>
+        </div>
+      </div>
+      {/* categories */}
+      <div className="px-8 py-4">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-[10px] font-semibold text-ink">Categories</span>
+          <span className="text-[8px] text-brand-400">View all</span>
+        </div>
+        <div className="grid grid-cols-5 gap-3">
+          {CATS.map((c) => (
+            <div key={c.l} className="flex flex-col items-center">
+              <div className="aspect-square w-full overflow-hidden rounded-xl bg-surface-2">
+                <img src={c.img} className="h-full w-full object-cover" alt="" />
+              </div>
+              <span className="mt-1 text-[8px] text-ink">{c.l}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* featured products */}
+      <div className="px-8 pb-6">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-[10px] font-semibold text-ink">Featured Products</span>
+          <span className="text-[8px] text-brand-400">View all</span>
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          {PRODS.map((prod) => (
+            <div key={prod.n} className="rounded-xl border border-line bg-surface p-2">
+              <div className="aspect-square overflow-hidden rounded-lg bg-surface-2">
+                <img src={prod.img} className="h-full w-full object-cover" alt="" />
+              </div>
+              <p className="mt-2 text-[8px] font-medium leading-snug text-ink">{prod.n}</p>
+              <p className="mt-0.5 text-[9px] font-semibold text-ink">{prod.p}</p>
+              <div className="mt-0.5 flex items-center gap-1">
+                <span className="text-[7px] text-warning">★</span>
+                <span className="text-[7px] text-muted">{prod.r} ({prod.rc})</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── live preview panel — edge-to-edge, ResizeObserver for scale ─── */
+type Device = "phone" | "desktop";
 
 function LivePreviewPanel({ className }: { className?: string }) {
-  const [device, setDevice] = useState<Device>("phone");
-  const devices: { key: Device; icon: React.ElementType; label: string }[] = [
-    { key: "phone", icon: Smartphone, label: "Phone" },
-    { key: "tablet", icon: Tablet, label: "Tablet" },
-    { key: "desktop", icon: Monitor, label: "Desktop" },
-  ];
+  const [device, setDevice] = useState<Device>("desktop");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [panelWidth, setPanelWidth] = useState(450);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setPanelWidth(entry.contentRect.width);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const mobileInnerW = 375;
+  const desktopInnerW = 900;
+  const mobileScale = panelWidth / mobileInnerW;
+  const desktopScale = panelWidth / desktopInnerW;
+
+  // height of the visible clip area (fixed)
+  const previewH = 400;
+  // inner content rendered height (before scale) for each mode
+  const mobileInnerH = previewH / mobileScale;
+  const desktopInnerH = previewH / desktopScale;
+
   return (
     <div className={cn(card, "flex flex-col p-4", className)}>
       <div className="flex items-center justify-between">
         <h3 className="font-display text-[14px] font-semibold text-ink">Live Preview</h3>
         <div className="flex items-center gap-0.5 rounded-lg border border-line p-1">
-          {devices.map(({ key, icon: Icon, label }) => (
-            <button
-              key={key}
-              title={label}
-              onClick={() => setDevice(key)}
-              className={cn("rounded-md p-1.5 transition-colors", device === key ? "bg-brand text-white" : "text-muted hover:text-ink")}
-            >
-              <Icon className="h-3.5 w-3.5" />
+          {([{ key: "phone" as const, icon: Smartphone, label: "Mobile" }, { key: "desktop" as const, icon: Monitor, label: "Desktop" }]).map(({ key, icon: Icon, label }) => (
+            <button key={key} title={label} onClick={() => setDevice(key)}
+              className={cn("flex items-center gap-1 rounded-md px-2 py-1.5 text-[11px] font-medium transition-colors",
+                device === key ? "bg-brand text-white" : "text-muted hover:text-ink")}>
+              <Icon className="h-3.5 w-3.5" /> {label}
             </button>
           ))}
         </div>
       </div>
-      <div className="mt-4 flex flex-1 items-start justify-center overflow-hidden">
+
+      {/* edge-to-edge preview container */}
+      <div ref={containerRef} className="relative mt-4 w-full overflow-hidden rounded-xl border border-line bg-canvas"
+        style={{ height: previewH }}>
         {device === "phone" ? (
-          <div className="relative overflow-hidden rounded-[20px] border-[3px] border-white/15 bg-canvas" style={{ width: 165, height: 350 }}>
-            <div style={{ width: 375, transform: "scale(0.44)", transformOrigin: "top left" }}>
-              <MiniStorefrontPreview />
-            </div>
-          </div>
-        ) : device === "tablet" ? (
-          <div className="relative overflow-hidden rounded-xl border-2 border-white/15 bg-canvas" style={{ width: 256, height: 350 }}>
-            <div style={{ width: 600, transform: "scale(0.427)", transformOrigin: "top left" }}>
-              <MiniStorefrontPreview />
-            </div>
+          <div style={{
+            width: mobileInnerW,
+            transform: `scale(${mobileScale})`,
+            transformOrigin: "top left",
+            height: mobileInnerH,
+            overflow: "hidden",
+          }}>
+            <MiniMobilePreview />
           </div>
         ) : (
-          <div className="relative w-full overflow-hidden rounded-xl border border-white/10 bg-canvas" style={{ height: 350 }}>
-            <div className="flex items-center gap-1.5 border-b border-white/10 bg-surface-2 px-3 py-1.5">
-              <div className="h-1.5 w-1.5 rounded-full bg-danger" />
-              <div className="h-1.5 w-1.5 rounded-full bg-warning" />
-              <div className="h-1.5 w-1.5 rounded-full bg-success" />
-              <span className="ml-2 text-[8px] text-muted">luxe-wears.sovcart.com</span>
-            </div>
-            <div className="overflow-hidden" style={{ height: 320 }}>
-              <div style={{ width: 780, transform: "scale(0.45)", transformOrigin: "top left" }}>
-                <MiniStorefrontPreview />
-              </div>
-            </div>
+          <div style={{
+            width: desktopInnerW,
+            transform: `scale(${desktopScale})`,
+            transformOrigin: "top left",
+            height: desktopInnerH,
+            overflow: "hidden",
+          }}>
+            <MiniDesktopPreview />
           </div>
         )}
       </div>
-      <p className="mt-3 text-center text-[10px] text-muted">Preview updates on save</p>
+
+      <p className="mt-2 text-center text-[10px] text-muted">Preview updates on save</p>
     </div>
   );
 }

@@ -35,7 +35,7 @@ function Pill({ children, active, count }: { children: React.ReactNode; active?:
     <button
       className={cn(
         "flex items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-1.5 text-[12.5px] font-medium transition",
-        active ? "bg-brand-grad text-white shadow-glow" : "text-muted hover:bg-white/[0.04] hover:text-ink"
+        active ? "bg-brand text-white" : "text-muted hover:bg-white/[0.04] hover:text-ink"
       )}
     >
       {children}
@@ -703,7 +703,7 @@ function MobileLayout({ onMenu, onOpenSheet, sheetOpen, onCloseSheet }: { onMenu
             <h1 className="font-display text-[24px] font-bold text-ink">Products</h1>
             <p className="mt-1 text-[13px] text-muted">Manage your products, inventory and variants.</p>
           </div>
-          <button className="flex shrink-0 items-center gap-1.5 rounded-xl bg-brand-grad px-3.5 py-2.5 text-[12px] font-semibold text-white shadow-glow">
+          <button className="flex shrink-0 items-center gap-1.5 rounded-xl bg-brand-grad px-3.5 py-2.5 text-[12px] font-semibold text-white">
             <Plus className="h-4 w-4" /> Add Product
           </button>
         </div>

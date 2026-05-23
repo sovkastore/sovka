@@ -34,7 +34,7 @@ function Pill({ children, active, count }: { children: React.ReactNode; active?:
   return (
     <button
       className={cn(
-        "flex items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-1.5 text-[12.5px] font-medium transition",
+        "flex items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-1.5 text-[12.5px] font-medium transition-colors",
         active ? "bg-brand text-white" : "text-muted hover:bg-white/[0.04] hover:text-ink"
       )}
     >
@@ -59,8 +59,8 @@ function SelectBox({ label, className }: { label: string; className?: string }) 
 
 function Toggle({ on }: { on: boolean }) {
   return (
-    <span className={cn("relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition", on ? "bg-brand" : "bg-white/15")}>
-      <span className={cn("inline-block h-4 w-4 rounded-full bg-white shadow transition", on ? "translate-x-[18px]" : "translate-x-0.5")} />
+    <span className={cn("relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors", on ? "bg-brand" : "bg-white/15")}>
+      <span className={cn("inline-block h-4 w-4 rounded-full bg-white shadow transition-transform", on ? "translate-x-[18px]" : "translate-x-0.5")} />
     </span>
   );
 }
@@ -710,7 +710,7 @@ function MobileLayout({ onMenu, onOpenSheet, sheetOpen, onCloseSheet }: { onMenu
         <div className="grid grid-cols-2 gap-3">
           {MOBILE_STATS.map((s) => <MobileStatCard key={s.label} s={s} />)}
         </div>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex overflow-x-auto no-scrollbar gap-1.5">
           {MOBILE_TABS_P.map((t, i) => <Pill key={t.label} active={i === 0} count={t.count}>{t.label}</Pill>)}
         </div>
         <div className="flex items-center gap-2">

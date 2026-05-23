@@ -237,7 +237,7 @@ export function MobileShell({
   return (
     <div className="flex h-[100dvh] flex-col overflow-hidden lg:hidden">
       <MobileTopBar onMenu={onMenu} showSearch={showSearch} tagline={tagline} />
-      <main className="flex-1 overflow-y-auto overscroll-contain">{children}</main>
+      <main className="flex-1 overflow-y-auto overscroll-contain will-change-transform">{children}</main>
       <MobileBottomNav activeKey={activeKey} />
     </div>
   );

@@ -60,3 +60,65 @@ export const TRUST = [
   { icon: "shield", title: "Secure Payments", sub: "100% protected checkout" },
   { icon: "headphones", title: "Get Support", sub: "We're here to help" },
 ];
+
+/* ─── product detail ─── */
+export type ProductDetailData = {
+  id: string; name: string; tag: string; inStock: boolean;
+  rating: number; reviews: number; price: string; priceRaw: number;
+  description: string; productDetailItems: string[];
+  breadcrumb: string[];
+  images: { id: string; url: string; alt: string }[];
+  sizes: { value: string; available: boolean }[];
+  defaultSize: string;
+  colors: { name: string; hex: string; hex2?: string }[];
+  defaultColor: string;
+  whatsappPhone: string; instagramHandle: string;
+  deliveryNote: string; deliveryEst: string;
+};
+
+export const PRODUCT_DETAIL: ProductDetailData = {
+  id: "canvas-sneakers-white",
+  name: "Canvas Sneakers White",
+  tag: "New Arrival",
+  inStock: true,
+  rating: 4.7,
+  reviews: 124,
+  price: "₦24,000",
+  priceRaw: 24000,
+  description: "Clean, classic and effortlessly versatile. Premium canvas with a cushioned insole for all-day comfort and timeless style.",
+  productDetailItems: [
+    "Premium canvas upper",
+    "Breathable lining",
+    "Cushioned insole for all-day comfort",
+    "Rubber outsole for durability and grip",
+  ],
+  breadcrumb: ["Home", "Sneakers", "Canvas Sneakers White"],
+  images: [
+    { id: "i1", url: "/products/sneakers-white.webp", alt: "Canvas Sneakers White — Front" },
+    { id: "i2", url: "/products/sneakers-white.webp", alt: "Canvas Sneakers White — Side" },
+    { id: "i3", url: "/products/sneakers-white.webp", alt: "Canvas Sneakers White — Back" },
+    { id: "i4", url: "/products/sneakers-white.webp", alt: "Canvas Sneakers White — Detail" },
+    { id: "i5", url: "/products/sneakers-white.webp", alt: "Canvas Sneakers White — Top" },
+  ],
+  sizes: [
+    { value: "40", available: true },
+    { value: "41", available: true },
+    { value: "42", available: true },
+    { value: "43", available: true },
+    { value: "44", available: true },
+  ],
+  defaultSize: "42",
+  colors: [
+    { name: "White", hex: "#EAEAEA" },
+    { name: "Black", hex: "#1A1A1A" },
+    { name: "Brown/White", hex: "#8B5E3C", hex2: "#EAEAEA" },
+  ],
+  defaultColor: "White",
+  whatsappPhone: "2348000000000",
+  instagramHandle: "luxewears",
+  deliveryNote: "Free delivery on orders over ₦50,000",
+  deliveryEst: "2–4 business days",
+};
+
+export const SIMILAR_PRODUCTS: SfProduct[] = FEATURED.filter((p) => p.id !== "f1");
+
